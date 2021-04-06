@@ -1,4 +1,5 @@
 """ Models for application """
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -46,8 +47,8 @@ class RecipeIngredient(db.Model):
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'))
     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.ingredient_id'))
 
-    recipe = db.relationship('Recipe', backref='recipes')
-    ingredient = db.relationship('Ingredient', backref='ingredients')
+    recipe = db.relationship('Recipe', backref='recipe_ingredients')
+    ingredient = db.relationship('Ingredient', backref='recipe_ingredients')
 
     def __repr__(self):
         return f'<RecipeIngredient recipe_ingredient_id={self.recipe_ingredient_id} recipe_id={self.recipe_id} ingredient_id={self.ingredient_id}>'
@@ -79,7 +80,7 @@ class Cleanse(db.Model):
     public = db.Column(db.Boolean)
     description = db.Column(db.Text)
 
-    user = db.relationship('User', backref='users')
+    user = db.relationship('User', backref='cleanses')
 
     def __repr__(self):
         return f'<Cleanse cleanse_id={self.cleanse_id} user_id={self.user_id} start_date={self.start_date} end_date={self.end_date} public={self.public} description={self.description}>'
@@ -96,8 +97,8 @@ class UserCleanse(db.Model):
     active = db.Column(db.Boolean)
     completed = db.Column(db.Boolean)
 
-    cleanse = db.relationship('Cleanse', backref='cleanses')
-    user = db.relationship('User', backref='users')
+    cleanse = db.relationship('Cleanse', backref='user_cleanses')
+    user = db.relationship('User', backref='user_cleanses')
 
     def __repr__(self):
         return f'<UserCleanse user_cleanse={self.user_cleanse_id} cleanse_id={self.cleanse_id} user_id={self.user_id} active={self.active} completed={self.completed}>'
@@ -115,8 +116,8 @@ class UserCleanseRecipe(db.Model):
     timestamp = db.Column(db.Time)
     date = db.Column(db.DateTime)
 
-    user_cleanse = db.relationship('UserCleanse', backref='user_cleanses')
-    recipe = db.relationship('Recipe', backref='recipes')
+    user_cleanse = db.relationship('UserCleanse', backref='user_cleanse_recipes')
+    recipe = db.relationship('Recipe', backref='user_cleanse_recipes')
 
     def __repr__(self):
         return f'<UserCleanseRecipe user_cleanse_recipe_id={self.user_cleanse_recipe_id} user_cleanse_id={self.user_cleanse_id} recipe_id={self.recipe_id} timestamp={self.timestamp} date-{self.date}>'
@@ -134,7 +135,7 @@ class CleanseLog(db.Model):
     comment = db.Column(db.Text)
     private = db.Column(db.Boolean)
 
-    user_cleanse = db.relationship('UserCleanse', backref='user_cleanses')
+    user_cleanse = db.relationship('UserCleanse', backref='cleanse_logs')
 
     def __repr__(self):
         return f'<CleanseLog cleanse_log_id={self.cleanse_log_id} user_cleanse_id={self.user_cleanse_id} timestamp={self.timestamp} comment={self.comment} private={self.private}>'
