@@ -1,5 +1,5 @@
 """ Models for application """
-from flask_sqlachemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 db = SQLAlchemy()
@@ -42,7 +42,7 @@ class RecipeIngredient(db.Model):
 
     __tablename__ = 'recipe_ingredients'
 
-    recipe_ingredient_id = (db.Integer, autoincrement=True, primary_key=True)
+    recipe_ingredient_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'))
     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.ingredient_id'))
 
@@ -50,9 +50,7 @@ class RecipeIngredient(db.Model):
     ingredient = db.relationship('Ingredient', backref='ingredients')
 
     def __repr__(self):
-        return f'<RecipeIngredient recipe_ingredient_id={self.recipe_ingredient_id} 
-                                                        recipe_id={self.recipe_id} 
-                                                        ingredient_id={self.ingredient_id}>'
+        return f'<RecipeIngredient recipe_ingredient_id={self.recipe_ingredient_id} recipe_id={self.recipe_id} ingredient_id={self.ingredient_id}>'
 
 
 class Ingredient(db.Model):
@@ -66,8 +64,7 @@ class Ingredient(db.Model):
     calories = db.Column(db.Integer)
 
     def __repr__(self):
-        return f'<Ingredient ingredient_id={self.ingredient_id} food_data_id={self.food_data_id} 
-                                            name={self.name} calories={self.calories}>'
+        return f'<Ingredient ingredient_id={self.ingredient_id} food_data_id={self.food_data_id} name={self.name} calories={self.calories}>'
 
 
 class Cleanse(db.Model):
@@ -78,15 +75,14 @@ class Cleanse(db.Model):
     cleanse_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     start_date = db.Column(db.DateTime)
-    end_date = db.Column(db.date)
+    end_date = db.Column(db.Date)
     public = db.Column(db.Boolean)
     description = db.Column(db.Text)
 
     user = db.relationship('User', backref='users')
 
     def __repr__(self):
-        return f'<Cleanse cleanse_id={self.cleanse_id} user_id={self.user_id} start_date={self.start_date} 
-                                    end_date={self.end_date} public={self.public} description={self.description}>'
+        return f'<Cleanse cleanse_id={self.cleanse_id} user_id={self.user_id} start_date={self.start_date} end_date={self.end_date} public={self.public} description={self.description}>'
 
 
 class UserCleanse(db.Model):
@@ -104,8 +100,7 @@ class UserCleanse(db.Model):
     user = db.relationship('User', backref='users')
 
     def __repr__(self):
-        return f'<UserCleanse user_cleanse={self.user_cleanse_id} cleanse_id={self.cleanse_id} user_id={self.user_id} 
-                                            active={self.active} completed={self.completed}>'
+        return f'<UserCleanse user_cleanse={self.user_cleanse_id} cleanse_id={self.cleanse_id} user_id={self.user_id} active={self.active} completed={self.completed}>'
 
 
 
@@ -124,8 +119,7 @@ class UserCleanseRecipe(db.Model):
     recipe = db.relationship('Recipe', backref='recipes')
 
     def __repr__(self):
-        return f'<UserCleanseRecipe user_cleanse_recipe_id={self.user_cleanse_recipe_id} user_cleanse_id={self.user_cleanse_id} 
-                                                            recipe_id={self.recipe_id} timestamp={self.timestamp} date-{self.date}>'
+        return f'<UserCleanseRecipe user_cleanse_recipe_id={self.user_cleanse_recipe_id} user_cleanse_id={self.user_cleanse_id} recipe_id={self.recipe_id} timestamp={self.timestamp} date-{self.date}>'
 
 
 
@@ -143,8 +137,5 @@ class CleanseLog(db.Model):
     user_cleanse = db.relationship('UserCleanse', backref='user_cleanses')
 
     def __repr__(self):
-        return f'<CleanseLog cleanse_log_id={self.cleanse_log_id} user_cleanse_id={self.user_cleanse_id} 
-                                            timestamp={self.timestamp} comment={self.comment} private={self.private}>'
-
-
+        return f'<CleanseLog cleanse_log_id={self.cleanse_log_id} user_cleanse_id={self.user_cleanse_id} timestamp={self.timestamp} comment={self.comment} private={self.private}>'
 
