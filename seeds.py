@@ -27,13 +27,18 @@ SEED = {
             'description': 'my first cleanse!',
             'start_date': datetime.now(),
             'end_date': '',
-            'public': 'FALSE',
-            'active': 'TRUE',
-            'completed': 'FALSE'
+            'public': FALSE,
+            'active': TRUE,
+            'completed': FALSE
+        },
+        'cleanse_log': {
+            'timestamp': datetime.now().time(),
+            'comment': 'it hass only been an hour and i am ready to eat',
+            'private': TRUE
+
         },
         'recipe': {
             'name': 'sunshine',
-            'user': 'db_user_1',
             'timestamp': datetime.now().time()
         },
         'ingredients': {
@@ -70,7 +75,12 @@ for i in SEED:
     active = SEED[i]['cleanse']['active']
     completed = SEED[i]['cleanse']['completed']
 
+    clog_timestamp = SEED[i]['cleanse_log']['timestamp']
+    comment = SEED[i]['cleanse_log']['comment']
+    private = SEED[i]['cleanse_log']['private']
+
     r_name = SEED[i]['recipe']['name']
+    timestamp = SEED[i]['recipe']['timestamp']
 
     i_name = SEED[i]['ingredients'][1]['name']
     calories = SEED[i]['ingredients'][1]['calories']
@@ -83,9 +93,7 @@ for i in SEED:
     db_cleanse = crud.create_cleanse(start_date, end_date, public, description, db_user)
 
     crud.create_recipe_ingredient(db_recipe, db_ingredient)
-    crud.create_user_cleanse(active, completed, db_cleanse, db_user)
-    crud.create_recipe_ingredient
+    db_user_cleanse = crud.create_user_cleanse(active, completed, db_cleanse, db_user)
+    crud.create_user_cleanse_recipe(timestamp, start_date, db_user_cleanse, db_recipe)
+    crud.create_cleanse_log(clog_timestamp, comment, private, db_user_cleanse)
 
-
-
-crud.create_user()
