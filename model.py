@@ -76,7 +76,7 @@ class Cleanse(db.Model):
     cleanse_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     start_date = db.Column(db.DateTime)
-    end_date = db.Column(db.Date)
+    end_date = db.Column(db.DateTime)
     public = db.Column(db.Boolean)
     description = db.Column(db.Text)
 
@@ -113,7 +113,7 @@ class UserCleanseRecipe(db.Model):
     user_cleanse_recipe_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_cleanse_id = db.Column(db.Integer, db.ForeignKey('user_cleanses.user_cleanse_id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'))
-    timestamp = db.Column(db.Time)
+    timestamp = db.Column(db.DateTime)
     date = db.Column(db.DateTime)
 
     user_cleanse = db.relationship('UserCleanse', backref='user_cleanse_recipes')
@@ -131,7 +131,7 @@ class CleanseLog(db.Model):
 
     cleanse_log_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_cleanse_id = db.Column(db.Integer, db.ForeignKey('user_cleanses.user_cleanse_id'))
-    timestamp = db.Column(db.Time)
+    timestamp = db.Column(db.DateTime)
     comment = db.Column(db.Text, nullable=False)
     private = db.Column(db.Boolean)
 
