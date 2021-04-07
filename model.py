@@ -13,14 +13,14 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
     name = db.Column(db.String(15))
-    email = db.Column(db.String)
     location = db.Column(db.String(20))
     about = db.Column(db.Text)
     member_since = db.Column(db.DateTime)
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} email={self.email} username={self.username} name={self.name}>'
+        return f'<User user_id={self.user_id} email={self.email} username={self.username}'
 
 
 class Recipe(db.Model):
@@ -132,7 +132,7 @@ class CleanseLog(db.Model):
     cleanse_log_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_cleanse_id = db.Column(db.Integer, db.ForeignKey('user_cleanses.user_cleanse_id'))
     timestamp = db.Column(db.Time)
-    comment = db.Column(db.Text)
+    comment = db.Column(db.Text, nullable=False)
     private = db.Column(db.Boolean)
 
     user_cleanse = db.relationship('UserCleanse', backref='cleanse_logs')
