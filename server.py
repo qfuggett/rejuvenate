@@ -26,9 +26,14 @@ def user_profile():
 
 @app.route('/recipes')
 def all_recipes():
-    """Shows all smoothies in database"""
+    """Shows all cleanses, smoothies, and ingredients in database"""
 
-    return render_template('recipes.html')
+    recipes = crud.get_recipes()
+    ingredients = crud.get_ingredients()
+    cleanses = crud.get_cleanses()
+    recipe_ingredients = crud.get_recipe_ingredients()
+
+    return render_template('recipes.html', recipes=recipes, ingredients=ingredients, cleanses=cleanses, recipe_ingredients=recipe_ingredients)
 
 
 

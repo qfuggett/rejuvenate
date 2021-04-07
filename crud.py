@@ -25,6 +25,11 @@ def create_recipe(name, user):
     return recipe
 
 
+def get_recipes():
+    """Returns all recipes in database"""
+
+    return Recipe.query.all()
+
 def create_ingredient(name, calories):
 
     ingredient = Ingredient(name=name, calories=calories)
@@ -33,6 +38,12 @@ def create_ingredient(name, calories):
     db.session.commit()
 
     return ingredient
+
+
+def get_ingredients():
+    """Returns all ingredients in database"""
+
+    return Ingredient.query.all()
 
 
 def create_recipe_ingredient(recipe, ingredient):
@@ -45,6 +56,11 @@ def create_recipe_ingredient(recipe, ingredient):
     return recipe_ingredient
 
 
+def get_recipe_ingredients():
+
+    return RecipeIngredient.query.all()
+
+
 def create_cleanse(start_date, end_date, public, description, user):
 
     cleanse = Cleanse(start_date=start_date, end_date=end_date, public=public, description=description, user=user)
@@ -53,6 +69,12 @@ def create_cleanse(start_date, end_date, public, description, user):
     db.session.commit()
 
     return cleanse
+
+
+def get_cleanses():
+    """Returns all cleanses in database"""
+
+    return Cleanse.query.all()
 
 
 def create_user_cleanse(active, completed, cleanse, user):
