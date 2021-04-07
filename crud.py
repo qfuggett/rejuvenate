@@ -1,13 +1,13 @@
 """CRUD operations."""
 
-from model import, db, User, Recipe, Ingredient, RecipeIngredient, Cleanse, UserCleanse, UserCleanseRecipe, CleanseLog, connect_to_db
+from model import db, User, Recipe, Ingredient, RecipeIngredient, Cleanse, UserCleanse, UserCleanseRecipe, CleanseLog, connect_to_db
 
 
 
 def create_user(username, email, password):
     """Create and return a new user"""
 
-    user = User(username=username, email=email, password=password, name=name)
+    user = User(username=username, email=email, password=password)
 
     db.session.add(user)
     db.session.commit()
