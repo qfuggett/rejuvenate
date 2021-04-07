@@ -257,4 +257,3 @@ for i in SEED:
     db_user_cleanse = crud.create_user_cleanse(active, completed, db_cleanse, db_user)
     crud.create_user_cleanse_recipe(timestamp, start_date, db_user_cleanse, db_recipe)
     crud.create_cleanse_log(clog_timestamp, comment, private, db_user_cleanse)
-
