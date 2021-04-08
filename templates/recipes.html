@@ -4,17 +4,22 @@
 {% block body %}
   <h1>All Smoothies in Database!</h1>
 
-  {% for recipe in recipes %}
+  {% for cleanse in cleanses %}
   <ul>
-    <li>{{ recipe.name }}</li>
-    {% for ingredient in ingredients %}
-      {% for recipe_ingredient in recipe_ingredients %}
+    <li>{{ cleanse.description }}</li>
+    {% for recipe in recipes %}
     <ul>
-      {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
-      <li>{{ ingredient.name }}</li>
-      {% endif %}
-    </ul>
+      <li>{{ recipe.name }}</li>
+      {% for ingredient in ingredients %}
+        {% for recipe_ingredient in recipe_ingredients %}
+      <ul>
+        {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
+        <li>{{ ingredient.name }}</li>
+        {% endif %}
+      </ul>
+        {% endfor %}
       {% endfor %}
+    </ul>
     {% endfor %}
   </ul>
   {% endfor %}

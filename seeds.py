@@ -213,7 +213,8 @@ SEED = {
     }
 }
 
-for i in SEED:
+for i in SEED:    
+
     username = SEED[i]['info']['username']
     email = SEED[i]['info']['email']
     password = SEED[i]['info']['password']

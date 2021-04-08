@@ -15,6 +15,12 @@ def create_user(username, email, password):
     return user
 
 
+def get_user_by_email(email):
+    """Return a user by email"""
+
+    return User.query.filter(User.email == email).first()
+
+
 def create_recipe(name, user):
 
     recipe = Recipe(name=name, user=user)
