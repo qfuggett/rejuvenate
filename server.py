@@ -1,6 +1,6 @@
 """Server for rejuvenate application"""
 
-from flask import (Flask, render_template, request, flash, session, redirect)
+from flask import (Flask, render_template, request, flash, session, redirect, url_for)
 from model import connect_to_db
 from jinja2 import StrictUndefined
 import crud
@@ -53,21 +53,44 @@ def sign_up():
     #     crud.create_user(username, email, password)
     #     flash('Account created! Please log in.')
 
-    return render_template('signup.html')
+    return render_template('signup.html', user=user)
 
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     """User can login with existing account details"""
 
-    username = request.args.get('username')
-    email = request.args.get('email')
-    password = request.args.get('password')
+    if request.method == 'POST': #we want to retrieve data from the form and send it to the next
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        session['user'] = username
+        flash("Logged in as %s" % username)
 
-    session['email'] = email
+        return redirect(url_for('user', user=username))
 
-    return render_template('login.html')
+    else: #just going to the /login page
+        return render_template('login.html')
 
+
+@app.route('/user')
+def user():
+    """Displays user profile page if logged in"""
+
+    if 'user' in session:
+        user = session['user']
+        return render_template('user_profile.html')
+    else:
+        return redirect('/login')
+
+
+@app.route('/logout')
+def logout():
+    """Logs the user out"""
+
+    session.pop('user', None)
+
+    return redirect('/login')
 
 
 

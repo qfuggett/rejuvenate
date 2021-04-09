@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Profile{% endblock %}
+{% block title %}Profile for {{ session['user'] }} {% endblock %}
 
 {% block body %}
   <h1>Here are your details:</h1>
@@ -7,4 +7,6 @@
   <ul>
     <li>test</li>
   </ul>
+  <br>
+  <a href="/">Go to Homepage</a>
 {% endblock %}
