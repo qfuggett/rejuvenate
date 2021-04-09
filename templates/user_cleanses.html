@@ -6,8 +6,10 @@
 shows the current cleanse and a list of all user cleanses
 click on cleanse to reveal all recipes/smoothies associated with it
 click on recipe to show ingredients used
+
+  {% for cleanse in cleanses %}
   <ul>
-    <li>{{ cleanses.description }}</li>
+    <li><a href="/cleanse/{{ cleanse.cleanse_id }}">{{ cleanse.description }}</a></li>
   </ul>
-  
+  {% endfor %}
 {% endblock %}

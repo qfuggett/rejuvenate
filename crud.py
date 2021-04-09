@@ -89,6 +89,12 @@ def get_cleanses():
     return Cleanse.query.all()
 
 
+def get_cleanse_by_id(cleanse_id):
+    """Returns a specific cleanse by id"""
+
+    return Cleanse.query.get(cleanse_id)
+
+
 def get_user_cleanses(user_id):
     """Returns all cleanses for a specific user"""
 

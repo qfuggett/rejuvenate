@@ -30,7 +30,7 @@ def user_profile():
 
 @app.route('/recipes')
 def all_recipes():
-    """Shows all cleanses, smoothies, and ingredients in database"""
+    """Shows all cleanses, smoothies, and ingredients in entire database"""
 
     recipes = crud.get_recipes()
     ingredients = crud.get_ingredients()
@@ -49,15 +49,23 @@ def recipe():
     return render_template('recipe_details.html')
 
 
-@app.route('/user_recipes')
-def user_recipes():
-    """Shows cleanses, smoothies and recipes for the logged in user"""
+@app.route('/user_cleanses')
+def user_cleanses():
+    """Shows all cleanses for a specific user"""
 
     user_id = session['user_id']
     cleanses = crud.get_user_cleanses(user_id)
 
+    return render_template('user_cleanses.html', cleanses=cleanses)
 
-    return render_template('user_recipes.html', cleanses=cleanses)
+
+@app.route('/cleanse/<cleanse_id>')
+def recipes(cleanse_id):
+    """Shows smoothies that belong to a cleanse and their ingredients"""
+
+    cleanse = crud.get_cleanse_by_id(cleanse_id)
+
+    return render_template('cleanse_details.html', cleanse=cleanse)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
