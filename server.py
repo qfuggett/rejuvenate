@@ -20,6 +20,7 @@ def homepage():
 @app.route('/profile')
 def user_profile():
     """User profile information"""
+    
 
     return render_template('user_profile.html')
 
@@ -35,6 +36,15 @@ def all_recipes():
 
     return render_template('recipes.html', recipes=recipes, ingredients=ingredients, 
                             cleanses=cleanses, recipe_ingredients=recipe_ingredients)
+
+
+@app.route('/user_recipes')
+def user_recipes():
+    """Shows cleanses, smoothies and recipes for the logged in user"""
+
+    
+
+    return render_template('user_recipes.html')
 
 
 @app.route('/signup', methods=['GET'])
@@ -64,12 +74,18 @@ def login():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        session['user'] = username
+
+        user = crud.get_user_by_email(email)
+        session['username'] = username
+        session['user_id'] = user.user_id
         flash("Logged in as %s" % username)
 
-        return redirect(url_for('user', user=username))
+        return render_template('user_profile.html', user=user)
 
     else: #just going to the /login page
+        if 'user' in session:
+            return redirect(url_for('user'))
+
         return render_template('login.html')
 
 
@@ -89,8 +105,9 @@ def logout():
     """Logs the user out"""
 
     session.pop('user', None)
+    flash('Successfully logged out')
 
-    return redirect('/login')
+    return redirect('/')
 
 
 

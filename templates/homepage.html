@@ -2,17 +2,19 @@
 {% block title %}Rejuvenate{% endblock %}
 
 {% block body %}
-  <h1>Welcome {{ session['user'] }}!</h1>
+  <h1>Welcome!</h1>
 
   <h2>Navigation</h2>
   <ul>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/signup">Sign Up</a></li>
-    <li><a href="/profile">Profile page</a></li>
-    <li><a href="/recipes">View all recipes in database</a></li>
-
-    {% if session.get('user') %}
+    {% if session.get('username') %}
+      <li><a href="/profile">Profile Settings</a></li>
+      <li><a href="/user_recipes">My Recipes</a></li>
+      <li><a href="/recipes">View all recipes in database</a></li>
       <li><a href="/logout">Logout</a></li>
+    {% else %}
+      <li><a href="/login">Login</a></li>
+      <li><a href="/signup">Sign Up</a></li>
+      <li><a href="/recipes">View all recipes in database</a></li>
     {% endif %}
   </ul>
 {% endblock %}

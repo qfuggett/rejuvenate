@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Profile for {{ session['user'] }} {% endblock %}
+{% block title %}Profile for {{ session['username'] }} {% endblock %}
 
 {% block body %}
   <h1>Here are your details:</h1>
 
   <ul>
-    <li>test</li>
+    <li>session user id is {{ session['user_id'] }}</li>
   </ul>
   <br>
   <a href="/">Go to Homepage</a>

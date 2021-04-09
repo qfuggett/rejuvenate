@@ -83,6 +83,22 @@ def get_cleanses():
     return Cleanse.query.all()
 
 
+def get_user_cleanses(user_id):
+    """Returns all cleanses for a specific user"""
+
+    user_id = user_id
+
+    return Cleanse.query.filter(Cleanse.user_id == user_id).all()
+
+
+def get_user_cleanse(user_id):
+    """Returns specific cleanse for a user"""
+
+    user_id = user_id
+
+    return Cleanse.query.filter(Cleanse.user_id == user_id).first()
+
+
 def create_user_cleanse(active, completed, cleanse, user):
 
     user_cleanse = UserCleanse(active=active, completed=completed, cleanse=cleanse, user=user)
