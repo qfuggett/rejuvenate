@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}{{ session['username'] }}'s Recipes{% endblock %}
+{% block title %}{{ session['username'] }}'s Cleanses{% endblock %}
 
 {% block body %}
   <h1>My Cleanses</h1>
-
+shows the current cleanse and a list of all user cleanses
+click on cleanse to reveal all recipes/smoothies associated with it
+click on recipe to show ingredients used
   <ul>
     <li>{{ cleanses.description }}</li>
   </ul>

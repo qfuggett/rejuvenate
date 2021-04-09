@@ -41,6 +41,14 @@ def all_recipes():
                             cleanses=cleanses, recipe_ingredients=recipe_ingredients)
 
 
+@app.route('/recipe/<recipe_id>')
+def recipe():
+    """Shows specific recipe information"""
+
+
+    return render_template('recipe_details.html')
+
+
 @app.route('/user_recipes')
 def user_recipes():
     """Shows cleanses, smoothies and recipes for the logged in user"""
@@ -48,28 +56,33 @@ def user_recipes():
     user_id = session['user_id']
     cleanses = crud.get_user_cleanses(user_id)
 
-    
 
     return render_template('user_recipes.html', cleanses=cleanses)
 
 
-@app.route('/signup', methods=['GET'])
+@app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     """User can sign up for an account"""
 
-    username = request.form.get('username')
-    email = request.form.get('email')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        name = request.form.get('name')
+        location = request.form.get('location')
+        about = request.form.get('about')
+        member_since = request.form.get('member_since')
 
-    user = crud.get_user_by_email(email)
+        crud.create_user(username, email, password, name, location, about, member_since)
+        flash('Account created! Please log in.')
 
-    # if user:
-    #     flash('Cannot create an account with an existing email address. Try again')
-    # else:
-    #     crud.create_user(username, email, password)
-    #     flash('Account created! Please log in.')
+        # flash('Cannot create an account with an existing email address. Try again')
 
-    return render_template('signup.html', user=user)
+
+        return redirect('/login')
+    else:
+
+        return render_template('signup.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
