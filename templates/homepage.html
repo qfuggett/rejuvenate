@@ -10,5 +10,9 @@
     <li><a href="/signup">Sign Up</a></li>
     <li><a href="/profile">Profile page</a></li>
     <li><a href="/recipes">View all recipes in database</a></li>
+
+    {% if session.get('user') %}
+      <li><a href="/logout">Logout</a></li>
+    {% endif %}
   </ul>
 {% endblock %}
