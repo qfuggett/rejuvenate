@@ -4,10 +4,10 @@ from model import db, User, Recipe, Ingredient, RecipeIngredient, Cleanse, UserC
 
 
 
-def create_user(username, email, password):
+def create_user(username, email, password, name, location, about, member_since):
     """Create and return a new user"""
 
-    user = User(username=username, email=email, password=password)
+    user = User(username=username, email=email, password=password, name=name, location=location, about=about, member_since=member_since)
 
     db.session.add(user)
     db.session.commit()
@@ -22,6 +22,7 @@ def get_user_by_email(email):
 
 
 def create_recipe(name, user):
+    """Returns a recipe"""
 
     recipe = Recipe(name=name, user=user)
 
@@ -36,7 +37,9 @@ def get_recipes():
 
     return Recipe.query.all()
 
+
 def create_ingredient(name, calories):
+    """Creates an ingredient"""
 
     ingredient = Ingredient(name=name, calories=calories)
 
@@ -53,6 +56,7 @@ def get_ingredients():
 
 
 def create_recipe_ingredient(recipe, ingredient):
+    """Creates relationship between a recipe and its ingredient"""
 
     recipe_ingredient = RecipeIngredient(recipe=recipe, ingredient=ingredient)
 
@@ -63,11 +67,13 @@ def create_recipe_ingredient(recipe, ingredient):
 
 
 def get_recipe_ingredients():
+    """Returns all recipe ingredient relationships"""
 
     return RecipeIngredient.query.all()
 
 
 def create_cleanse(start_date, end_date, public, description, user):
+    """Creates a cleanse"""
 
     cleanse = Cleanse(start_date=start_date, end_date=end_date, public=public, description=description, user=user)
 
@@ -100,6 +106,7 @@ def get_user_cleanse(user_id):
 
 
 def create_user_cleanse(active, completed, cleanse, user):
+    """Creates relationship between a user and their cleanse"""
 
     user_cleanse = UserCleanse(active=active, completed=completed, cleanse=cleanse, user=user)
 
@@ -110,6 +117,7 @@ def create_user_cleanse(active, completed, cleanse, user):
 
 
 def create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe):
+    """Creates relationship between a users cleanse and a recipe"""
 
     user_cleanse_recipe = UserCleanseRecipe(timestamp=timestamp, date=date, user_cleanse=user_cleanse, recipe=recipe)
 
@@ -120,6 +128,7 @@ def create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe):
 
 
 def create_cleanse_log(timestamp, comment, private, user_cleanse):
+    """Creates a comment related to a users specific cleanse"""
 
     cleanse_log = CleanseLog(timestamp=timestamp, comment=comment, private=private, user_cleanse=user_cleanse)
 

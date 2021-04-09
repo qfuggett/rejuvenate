@@ -20,9 +20,12 @@ def homepage():
 @app.route('/profile')
 def user_profile():
     """User profile information"""
+
+    email = session['email']
+    user = crud.get_user_by_email(email)
     
 
-    return render_template('user_profile.html')
+    return render_template('user_profile.html', user=user)
 
 
 @app.route('/recipes')
@@ -42,9 +45,12 @@ def all_recipes():
 def user_recipes():
     """Shows cleanses, smoothies and recipes for the logged in user"""
 
+    user_id = session['user_id']
+    cleanses = crud.get_user_cleanses(user_id)
+
     
 
-    return render_template('user_recipes.html')
+    return render_template('user_recipes.html', cleanses=cleanses)
 
 
 @app.route('/signup', methods=['GET'])
@@ -77,6 +83,7 @@ def login():
 
         user = crud.get_user_by_email(email)
         session['username'] = username
+        session['email'] = email
         session['user_id'] = user.user_id
         flash("Logged in as %s" % username)
 
@@ -104,7 +111,8 @@ def user():
 def logout():
     """Logs the user out"""
 
-    session.pop('user', None)
+    session.clear()
+    # print(dir(session))
     flash('Successfully logged out')
 
     return redirect('/')

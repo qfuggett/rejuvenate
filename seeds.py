@@ -19,7 +19,11 @@ SEED = {
         'info': {
             'username': 'Tesa',
             'email': 'tesa@test.com',
-            'password': 'test'
+            'password': 'test',
+            'name': 'Tessy',
+            'location': 'Detroit, MI',
+            'about': 'ready to get started! wooooo',
+            'member_since': datetime.now()
         },
         'cleanse': {
             'description': 'my first cleanse!',
@@ -59,7 +63,10 @@ SEED = {
             'username': 'dhooper',
             'email': 'danielle@test.com',
             'password': 'test',
-            'name': 'Danielle'
+            'name': 'Danielle',
+            'location': 'Canton, MI',
+            'about': 'joined because my daughter suggested :)',
+            'member_since': datetime.now()
         },
         'cleanse': {
             'description': 'my first cleanse with the family!',
@@ -98,7 +105,11 @@ SEED = {
         'info': {
             'username': 'NyJai',
             'email': 'nyjai@test.com',
-            'password': 'test'
+            'password': 'test',
+            'name': 'YayyYayy',
+            'location': 'Southfield, MI',
+            'about': 'here we goooo',
+            'member_since': datetime.now()
         },
         'cleanse': {
             'description': 'lets goooo',
@@ -137,7 +148,11 @@ SEED = {
         'info': {
             'username': 'absrlife',
             'email': 'linda@test.com',
-            'password': 'test'
+            'password': 'test',
+            'name': "Gma",
+            'location': 'Oak Park, MI',
+            'about': 'Im an expert at this!',
+            'member_since': datetime.now()
         },
         'cleanse': {
             'description': 'first cleanse of the week!',
@@ -176,7 +191,11 @@ SEED = {
         'info': {
             'username': 'marcie',
             'email': 'marcie@test.com',
-            'password': 'test'
+            'password': 'test',
+            'name': 'new to this',
+            'location': 'Charlotte, NC',
+            'about': 'new to this...but excited',
+            'member_since': datetime.now()
         },
         'cleanse': {
             'description': 'first cleanse ever!',
@@ -218,6 +237,10 @@ for i in SEED:
     username = SEED[i]['info']['username']
     email = SEED[i]['info']['email']
     password = SEED[i]['info']['password']
+    name = SEED[i]['info']['name']
+    location = SEED[i]['info']['location']
+    about = SEED[i]['info']['about']
+    member_since = SEED[i]['info']['member_since']
 
     description = SEED[i]['cleanse']['description']
     start_date = SEED[i]['cleanse']['start_date']
@@ -244,7 +267,7 @@ for i in SEED:
 
 
 
-    db_user = crud.create_user(username, email, password)
+    db_user = crud.create_user(username, email, password, name, location, about, member_since)
     db_ingredient = crud.create_ingredient(i_name, calories)
     db_ingredient_2 = crud.create_ingredient(i_name_2, calories_2)
     db_ingredient_3 = crud.create_ingredient(i_name_3, calories_3)

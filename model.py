@@ -20,7 +20,7 @@ class User(db.Model):
     member_since = db.Column(db.DateTime)
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} email={self.email} username={self.username}'
+        return f'<User user_id={self.user_id} email={self.email} username={self.username} name={self.name} location={self.location} about={self.about} member_since={self.member_since}'
 
 
 class Recipe(db.Model):
