@@ -132,6 +132,22 @@ def create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe):
 
     return user_cleanse_recipe
 
+def get_user_cleanse_recipes(cleanse_id):
+# user.user_cleanses[0].user_cleanse_recipes[0].recipe
+
+    # user = User.query.get(user_id)
+    # cleanses = {}
+    # for cleanse in user.user_cleanses:
+
+    # cleanse.user_cleanses[0].user_cleanse_recipes[0].recipe
+    cleanse = get_cleanse_by_id(cleanse_id)
+
+    for cleanse in cleanse.user_cleanses.user_cleanse_recipes:
+        for recipe in cleanse.user_cleanses.user_cleanse_recipes:
+            recipe
+            
+    return recipe
+        
 
 def create_cleanse_log(timestamp, comment, private, user_cleanse):
     """Creates a comment related to a users specific cleanse"""

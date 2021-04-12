@@ -48,7 +48,7 @@ class RecipeIngredient(db.Model):
     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.ingredient_id'))
 
     recipe = db.relationship('Recipe', backref='recipe_ingredients')
-    ingredient = db.relationship('Ingredient', backref='recipe_ingredients')
+    ingredient = db.relationship('Ingredient')
 
     def __repr__(self):
         return f'<RecipeIngredient recipe_ingredient_id={self.recipe_ingredient_id} recipe_id={self.recipe_id} ingredient_id={self.ingredient_id}>'
@@ -118,6 +118,8 @@ class UserCleanseRecipe(db.Model):
 
     user_cleanse = db.relationship('UserCleanse', backref='user_cleanse_recipes')
     recipe = db.relationship('Recipe', backref='user_cleanse_recipes')
+
+    # >>> user.user_cleanses[0].user_cleanse_recipes[0].recipe
 
     def __repr__(self):
         return f'<UserCleanseRecipe user_cleanse_recipe_id={self.user_cleanse_recipe_id} user_cleanse_id={self.user_cleanse_id} recipe_id={self.recipe_id} timestamp={self.timestamp} date-{self.date}>'

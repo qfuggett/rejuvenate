@@ -59,6 +59,30 @@ def user_cleanses():
     return render_template('user_cleanses.html', cleanses=cleanses)
 
 
+@app.route('/start_cleanse', methods=['GET', 'POST'])
+def start_cleanse():
+    """Renders a form for a user to start a cleanse"""
+
+    user = crud.get_user_by_email(session['email'])
+
+    if request.method == 'POST':
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        public = request.form.get('public')
+        description = request.form.get('description')
+
+        if public == 'on':
+            public = True
+        else:
+            public = False
+
+        crud.create_cleanse(start_date, end_date, public, description, user)
+        return redirect('/user_cleanses')
+
+    else:
+        return render_template('start_cleanse.html')
+
+
 @app.route('/cleanse/<cleanse_id>')
 def recipes(cleanse_id):
     """Shows smoothies that belong to a cleanse and their ingredients"""
@@ -103,12 +127,19 @@ def login():
         password = request.form['password']
 
         user = crud.get_user_by_email(email)
-        session['username'] = username
-        session['email'] = email
-        session['user_id'] = user.user_id
-        flash("Logged in as %s" % username)
+        if user and password == user.password:
+            session['username'] = username
+            session['email'] = email
+            session['user_id'] = user.user_id
+            flash("Logged in as %s" % username)
 
-        return render_template('user_profile.html', user=user)
+        #write if statements: if email matches an email in the users table and the password given also matches the passwords
+        #in that same user record, then create session
+
+            return render_template('user_profile.html', user=user)
+        else:
+            flash("Incorrect information")
+            return redirect('/login')
 
     else: #just going to the /login page
         if 'user' in session:

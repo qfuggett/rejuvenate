@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Start Cleanse{% endblock %}
+
+{% block body %}
+    <h2>Start A New Cleanse</h2>
+    <form action="/start_cleanse" method="POST">
+        <p>
+            Start Date <input type="date" name="start_date">
+        </p>
+        
+        <p>
+            End Date <input type="date" name="end_date">
+        </p>
+    
+        <p>
+            Viewable by the public? <input type="checkbox" name="public" checked>
+        </p>
+
+        <p>
+            Description: <input type="text" name="description">
+        </p>
+    
+        <p>
+          <input type="submit">
+        </p>
+      </form>
+{% endblock %}
