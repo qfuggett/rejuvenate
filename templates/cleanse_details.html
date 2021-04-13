@@ -2,10 +2,22 @@
 {% block title %}Cleanse Details{% endblock %}
 
 {% block body %}
-    {% for user_cleanse_recipe in user_cleanse_recipes %}
-    <ul>
-        <li>{{ user_cleanse_recipe.recipe.name }}</li>
-    </ul>
-    {% endfor %}
+
+    {% if user_cleanse_recipes|length == 0 %}
+        <h2>You have no smoothies inside this cleanse...Add one!</h2></br>
+        <a href="/add_recipe">Add a Smoothie</a>
+
+    {% else %}
+        {% for user_cleanse_recipe in user_cleanse_recipes %}
+            <h2>{{ user_cleanse_recipe.user_cleanse.cleanse.description }}</h2>
+            <h2>Ingredients Inside:</h2>
+        {% endfor %}
+        {% for user_cleanse_recipe in user_cleanse_recipes %}
+        <ul>
+            <li>{{ user_cleanse_recipe.recipe.name }}</li>
+        </ul>
+        {% endfor %}
+    
+    {% endif %}
     
 {% endblock %}
