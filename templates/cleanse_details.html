@@ -2,5 +2,10 @@
 {% block title %}Cleanse Details{% endblock %}
 
 {% block body %}
-    <h2>{{ cleanse.description }}</h2>
+    {% for user_cleanse_recipe in user_cleanse_recipes %}
+    <ul>
+        <li>{{ user_cleanse_recipe.recipe.name }}</li>
+    </ul>
+    {% endfor %}
+    
 {% endblock %}

@@ -132,13 +132,11 @@ def create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe):
 
     return user_cleanse_recipe
 
-def get_user_cleanse_recipes(user_cleanse):
+def get_user_cleanse_recipes(user_cleanse_id):
+    """Shows all recipes for a specific cleanse"""
 
-    for user_cleanse_recipe in user_cleanse.user_cleanse_recipes:
-        print(user_cleanse_recipe.recipe.name)
-
-        for recipe_ingredient in user_cleanse_recipe.recipe.recipe_ingredients:
-            print("* " +  recipe_ingredient.ingredient.name)
+    
+    return UserCleanseRecipe.query.filter(UserCleanseRecipe.user_cleanse_id == user_cleanse_id).all()
         
 
 def create_cleanse_log(timestamp, comment, private, user_cleanse):

@@ -9,7 +9,7 @@ click on recipe to show ingredients used
 
   {% for user_cleanse in user_cleanses %}
   <ul>
-    <li><a href="/cleanse/{{ user_cleanse.cleanse.cleanse_id }}">{{ user_cleanse.cleanse.description }}</a></li>
+    <li><a href="/cleanse/{{ user_cleanse.user_cleanse_id }}">{{ user_cleanse.cleanse.description }}</a></li>
   </ul>
   {% endfor %}
 {% endblock %}

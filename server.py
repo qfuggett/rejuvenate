@@ -59,13 +59,13 @@ def user_cleanses():
     return render_template('user_cleanses.html', user_cleanses=user_cleanses)
 
 
-@app.route('/cleanse/<cleanse_id>')
-def recipes(cleanse_id):
+@app.route('/cleanse/<user_cleanse_id>')
+def user_cleanse_recipes(user_cleanse_id):
     """Shows recipes/smoothies that belong to a specific cleanse and their ingredients"""
 
-    cleanse = crud.get_user_cleanse_recipes(cleanse_id)
+    user_cleanse_recipes = crud.get_user_cleanse_recipes(user_cleanse_id)
 
-    return render_template('cleanse_details.html', cleanse=cleanse)
+    return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes)
 
 
 @app.route('/start_cleanse', methods=['GET', 'POST'])
