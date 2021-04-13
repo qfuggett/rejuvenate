@@ -3,6 +3,7 @@
 from flask import (Flask, render_template, request, flash, session, redirect, url_for)
 from model import connect_to_db
 from jinja2 import StrictUndefined
+from datetime import datetime
 import crud
 
 
@@ -49,6 +50,34 @@ def recipe():
     return render_template('recipe_details.html')
 
 
+@app.route('/add_recipe/<user_cleanse_id>', methods=['GET', 'POST'])
+def add_recipe(user_cleanse_id):
+    """Add a smoothie/recipe to a cleanse"""
+
+    if request.method == 'POST':
+
+        timestamp = datetime.now()
+        date = datetime.now()
+        user_cleanse = crud.get_user_cleanse(user_cleanse_id)
+
+        recipe_name = request.form.get('recipe_name')
+        ingredient_name = request.form.get('ingredient_name')
+        calories = request.form.get('calories')
+        user = crud.get_user_by_email(session['email'])
+
+        recipe = crud.create_recipe(recipe_name, user)
+        ingredient = crud.create_ingredient(ingredient_name, calories)
+
+        crud.create_recipe_ingredient(recipe, ingredient)
+        crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
+
+        return redirect('/cleanse/<user_cleanse_id>') #to immediately show updates to current cleanse
+    else:
+        return render_template('add_recipe.html')
+
+
+
+
 @app.route('/user_cleanses')
 def user_cleanses():
     """Shows all cleanses for a specific user"""
@@ -64,6 +93,7 @@ def user_cleanse_recipes(user_cleanse_id):
     """Shows recipes/smoothies that belong to a specific cleanse and their ingredients"""
 
     user_cleanse_recipes = crud.get_user_cleanse_recipes(user_cleanse_id)
+    session['user_cleanse_id'] = user_cleanse_id
 
     return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes)
 

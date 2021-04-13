@@ -7,6 +7,8 @@ from model import db, User, Recipe, Ingredient, RecipeIngredient, Cleanse, UserC
 def create_user(username, email, password, name, location, about, member_since):
     """Create and return a new user"""
 
+    """IN USE"""
+
     user = User(username=username, email=email, password=password, name=name, location=location, about=about, member_since=member_since)
 
     db.session.add(user)
@@ -17,6 +19,8 @@ def create_user(username, email, password, name, location, about, member_since):
 
 def get_user_by_email(email):
     """Return a user by email"""
+
+    """IN USE"""
 
     return User.query.filter(User.email == email).first()
 
@@ -35,6 +39,8 @@ def create_recipe(name, user):
 def get_recipes():
     """Returns all recipes in database"""
 
+    """IN USE"""
+
     return Recipe.query.all()
 
 
@@ -51,6 +57,8 @@ def create_ingredient(name, calories):
 
 def get_ingredients():
     """Returns all ingredients in database"""
+
+    """IN USE"""
 
     return Ingredient.query.all()
 
@@ -69,11 +77,15 @@ def create_recipe_ingredient(recipe, ingredient):
 def get_recipe_ingredients():
     """Returns all recipe ingredient relationships"""
 
+    """IN USE"""
+
     return RecipeIngredient.query.all()
 
 
 def create_cleanse(start_date, end_date, public, description, user):
     """Creates a cleanse"""
+
+    """IN USE"""
 
     cleanse = Cleanse(start_date=start_date, end_date=end_date, public=public, description=description, user=user)
 
@@ -85,6 +97,8 @@ def create_cleanse(start_date, end_date, public, description, user):
 
 def get_cleanses():
     """Returns all cleanses in database"""
+
+    """IN USE"""
 
     return Cleanse.query.all()
 
@@ -98,21 +112,25 @@ def get_cleanse_by_id(cleanse_id):
 def get_user_cleanses(user_id):
     """Returns all cleanses for a specific user"""
 
+    """IN USE"""
+
     user_id = user_id
 
     return UserCleanse.query.filter(UserCleanse.user_id == user_id).all()
 
 
-def get_user_cleanse(user_id):
-    """Returns specific cleanse for a user"""
+def get_user_cleanse(user_cleanse_id):
+    """Returns specific user cleanse for a user"""
 
-    user_id = user_id
+    user_cleanse_id = user_cleanse_id
 
-    return Cleanse.query.filter(Cleanse.user_id == user_id).first()
+    return UserCleanse.query.filter(UserCleanse.user_cleanse_id == user_cleanse_id).first()
 
 
 def create_user_cleanse(active, completed, cleanse, user):
     """Creates relationship between a user and their cleanse"""
+
+    """IN USE"""
 
     user_cleanse = UserCleanse(active=active, completed=completed, cleanse=cleanse, user=user)
 
@@ -124,6 +142,8 @@ def create_user_cleanse(active, completed, cleanse, user):
 
 def create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe):
     """Creates relationship between a users cleanse and a recipe"""
+
+    """IN USE"""
 
     user_cleanse_recipe = UserCleanseRecipe(timestamp=timestamp, date=date, user_cleanse=user_cleanse, recipe=recipe)
 
