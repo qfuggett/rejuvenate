@@ -76,7 +76,8 @@ def start_cleanse():
         else:
             public = False
 
-        crud.create_cleanse(start_date, end_date, public, description, user)
+        cleanse = crud.create_cleanse(start_date, end_date, public, description, user)
+        crud.create_user_cleanse(True, False, cleanse, user)
         return redirect('/user_cleanses')
 
     else:
