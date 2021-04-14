@@ -122,6 +122,8 @@ def get_user_cleanses(user_id):
 def get_user_cleanse(user_cleanse_id):
     """Returns specific user cleanse for a user"""
 
+    """IN USE"""
+
     user_cleanse_id = user_cleanse_id
 
     return UserCleanse.query.filter(UserCleanse.user_cleanse_id == user_cleanse_id).first()

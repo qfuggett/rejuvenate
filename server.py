@@ -52,7 +52,7 @@ def recipe():
 
 @app.route('/add_recipe/<user_cleanse_id>', methods=['GET', 'POST'])
 def add_recipe(user_cleanse_id):
-    """Add a smoothie/recipe to a cleanse"""
+    """Add a smoothie/recipe to a cleanse that already has recipes"""
 
     if request.method == 'POST':
 
@@ -71,7 +71,33 @@ def add_recipe(user_cleanse_id):
         crud.create_recipe_ingredient(recipe, ingredient)
         crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
 
-        return redirect('/cleanse/<user_cleanse_id>') #to immediately show updates to current cleanse
+        return redirect('/user_cleanses') 
+    else:
+        return render_template('add_recipe.html')
+
+
+@app.route('/add_recipe_empty/<user_cleanse_id>', methods=['GET', 'POST'])
+def add_recipe_empty(user_cleanse_id):
+    """Add a smoothie/recipe to a cleanse that does not have any recipes"""
+
+    if request.method == 'POST':
+
+        timestamp = datetime.now()
+        date = datetime.now()
+        user_cleanse = crud.get_user_cleanse(user_cleanse_id)
+
+        recipe_name = request.form.get('recipe_name')
+        ingredient_name = request.form.get('ingredient_name')
+        calories = request.form.get('calories')
+        user = crud.get_user_by_email(session['email'])
+
+        recipe = crud.create_recipe(recipe_name, user)
+        ingredient = crud.create_ingredient(ingredient_name, calories)
+
+        crud.create_recipe_ingredient(recipe, ingredient)
+        crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
+
+        return redirect('/user_cleanses')
     else:
         return render_template('add_recipe.html')
 
@@ -92,10 +118,12 @@ def user_cleanses():
 def user_cleanse_recipes(user_cleanse_id):
     """Shows recipes/smoothies that belong to a specific cleanse and their ingredients"""
 
+    user_cleanse = crud.get_user_cleanse(user_cleanse_id)
     user_cleanse_recipes = crud.get_user_cleanse_recipes(user_cleanse_id)
     session['user_cleanse_id'] = user_cleanse_id
+    
 
-    return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes)
+    return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes, user_cleanse=user_cleanse)
 
 
 @app.route('/start_cleanse', methods=['GET', 'POST'])
