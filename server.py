@@ -6,6 +6,8 @@ from jinja2 import StrictUndefined
 from datetime import datetime
 import crud
 import requests 
+import json
+import os
 
 
 
@@ -145,34 +147,27 @@ def user_cleanse_recipes(user_cleanse_id):
 @app.route('/all_ingredients')
 def all_ingredients():
 
-    # food_name = 'orange'
-    # api_key = 'YIxqrISvGn66UTwFCzUdsxI4a3hkuaa28VK2xmnl'
-    # documentation = requests.get('https://api.nal.usda.gov/fdc/v1/json-spec?api_key=YIxqrISvGn66UTwFCzUdsxI4a3hkuaa28VK2xmnl')
-    # search_url = f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={api_key}&query={food_name}'
-    # all_foods = f'https://api.nal.usda.gov/fdc/v1/foods/list?api_key={api_key}'
-    # res = requests.get(search_url)
-    # ingredients = res.json()
-    # print(res.url)
-
-
-
-    # payload = {'api_key': 'YIxqrISvGn66UTwFCzUdsxI4a3hkuaa28VK2xmnl', 'query': 'peanut butter'}
-    # url = 'https://api.nal.usda.gov/fdc/v1/foods/search'
-    # res = requests.get(url, params=payload)
-    # data = res.json()
-
-    # ingredients = data['foods']
-
-    payload = {'ingr': 'orange', 'app_id': '7b27daff', 'app_key': 'f619f4ade814596980a528ab1254bb06'}
+    app_key = os.environ['app_key']
+    app_id = os.environ['app_id']
+    payload = {'ingr': 'orange', 'app_id': app_id, 'app_key': app_key}
     url = 'https://api.edamam.com/api/food-database/v2/parser'
     res = requests.get(url, params=payload)
+    print('*********************************************************************************************')
     print(res.url)
-    ingredients = res.json()
+    data = res.json()
 
-    # ingredients = data['foods']
+    ingredient = data['hints'][1]
 
 
-    return render_template('all_ingredients.html', ingredients=ingredients)
+    print('*********************************************************************************************')
+    print(ingredient.keys())
+    print('*********************************************************************************************')
+    print(ingredient['food'])
+    print('*********************************************************************************************')
+    print(ingredient['measures'])
+
+
+    return render_template('all_ingredients.html', ingredients=ingredient)
 
 
 
