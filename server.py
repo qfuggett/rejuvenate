@@ -5,10 +5,14 @@ from model import connect_to_db
 from jinja2 import StrictUndefined
 from datetime import datetime
 import crud
+import requests 
+
 
 
 app = Flask(__name__)
 app.secret_key = "sdDI2u*&"
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
+
 
 
 @app.route('/')
@@ -42,12 +46,24 @@ def all_recipes():
                             cleanses=cleanses, recipe_ingredients=recipe_ingredients)
 
 
-@app.route('/recipe/<recipe_id>')
-def recipe():
+@app.route('/recipe/<recipe_id>', methods=['GET', 'POST', 'PUT'])
+def recipe(recipe_id):
     """Shows specific recipe information"""
 
+    recipe = crud.get_recipe_by_id(recipe_id)
+    recipe_ingredients = crud.get_recipe_ingredients_by_id(recipe_id)
 
-    return render_template('recipe_details.html')
+    if request.method == 'POST':
+
+        db.session.delete()
+        db.session.commit()
+        
+        return redirect('/user_cleanses')
+    elif request.method == 'PUT':
+
+        return redirect('/user_cleanses')
+    else:
+        return render_template('recipe_details.html', recipe=recipe, recipe_ingredients=recipe_ingredients)
 
 
 @app.route('/add_recipe/<user_cleanse_id>', methods=['GET', 'POST'])
@@ -121,9 +137,43 @@ def user_cleanse_recipes(user_cleanse_id):
     user_cleanse = crud.get_user_cleanse(user_cleanse_id)
     user_cleanse_recipes = crud.get_user_cleanse_recipes(user_cleanse_id)
     session['user_cleanse_id'] = user_cleanse_id
-    
+    count = 0
 
-    return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes, user_cleanse=user_cleanse)
+    return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes, user_cleanse=user_cleanse, count=count)
+
+
+@app.route('/all_ingredients')
+def all_ingredients():
+
+    # food_name = 'orange'
+    # api_key = 'YIxqrISvGn66UTwFCzUdsxI4a3hkuaa28VK2xmnl'
+    # documentation = requests.get('https://api.nal.usda.gov/fdc/v1/json-spec?api_key=YIxqrISvGn66UTwFCzUdsxI4a3hkuaa28VK2xmnl')
+    # search_url = f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={api_key}&query={food_name}'
+    # all_foods = f'https://api.nal.usda.gov/fdc/v1/foods/list?api_key={api_key}'
+    # res = requests.get(search_url)
+    # ingredients = res.json()
+    # print(res.url)
+
+
+
+    # payload = {'api_key': 'YIxqrISvGn66UTwFCzUdsxI4a3hkuaa28VK2xmnl', 'query': 'peanut butter'}
+    # url = 'https://api.nal.usda.gov/fdc/v1/foods/search'
+    # res = requests.get(url, params=payload)
+    # data = res.json()
+
+    # ingredients = data['foods']
+
+    payload = {'ingr': 'orange', 'app_id': '7b27daff', 'app_key': 'f619f4ade814596980a528ab1254bb06'}
+    url = 'https://api.edamam.com/api/food-database/v2/parser'
+    res = requests.get(url, params=payload)
+    print(res.url)
+    ingredients = res.json()
+
+    # ingredients = data['foods']
+
+
+    return render_template('all_ingredients.html', ingredients=ingredients)
+
 
 
 @app.route('/start_cleanse', methods=['GET', 'POST'])

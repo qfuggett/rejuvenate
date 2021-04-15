@@ -16,14 +16,16 @@
             </ul>
 
     {% else %}
+        <h2>Smoothies in this Cleanse:</h2>
+        <ul>
         {% for user_cleanse_recipe in user_cleanse_recipes %}
-            <h2>{{ user_cleanse_recipe.user_cleanse.cleanse.description }}</h2>
-            <h2>Smoothies in this Cleanse:</h2>
-            <ul>
-                <li>{{ user_cleanse_recipe.recipe.name }}</li>
-            </ul>
-        <a href="/add_recipe/{{ user_cleanse_recipe.user_cleanse.user_cleanse_id }}">Add another smoothie to this cleanse!</a>
+                <li><a href="/recipe/{{ user_cleanse_recipe.recipe.recipe_id }}">{{ user_cleanse_recipe.recipe.name }}</a></li>
         {% endfor %}
+        {% for user_cleanse_recipe in user_cleanse_recipes %}
+            <a href="/add_recipe/{{ user_cleanse_recipe.user_cleanse.user_cleanse_id }}">Add another smoothie to this cleanse!</a>
+            {% break %}
+        {% endfor %}
+        </ul>
     {% endif %}
     
 {% endblock %}

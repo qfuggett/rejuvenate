@@ -44,6 +44,15 @@ def get_recipes():
     return Recipe.query.all()
 
 
+def get_recipe_by_id(recipe_id):
+    """Returns a specific recipe by id"""
+
+    """IN USE"""
+
+    return Recipe.query.get(recipe_id)
+
+
+
 def create_ingredient(name, calories):
     """Creates an ingredient"""
 
@@ -80,6 +89,14 @@ def get_recipe_ingredients():
     """IN USE"""
 
     return RecipeIngredient.query.all()
+
+
+def get_recipe_ingredients_by_id(recipe_id):
+    """Returns all recipe ingredient relationships"""
+
+    """IN USE"""
+
+    return RecipeIngredient.query.filter(RecipeIngredient.recipe_id == recipe_id).all()
 
 
 def create_cleanse(start_date, end_date, public, description, user):

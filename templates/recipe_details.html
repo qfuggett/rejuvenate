@@ -2,8 +2,27 @@
 {% block title %}Specific Recipe{% endblock %}
 
 {% block body %}
+<h2>Ingredients in {{ recipe.name }}:</h2>
+{% for recipe_ingredient in recipe_ingredients %}
+<ul>
+    <li>{{ recipe_ingredient.ingredient.name }}, Calories: {{ recipe_ingredient.ingredient.calories }}</li>
+</ul>
+{% endfor %}
+</br>
 
-list of all recipes the user has created
-link to click on recipe to show ingredients on the same page  
+<form action="/recipe/{{ recipe.recipe_id }}?_method=PUT" method="post">
+    <input type="hidden" name="_method" value="PUT">
+    Change {{ recipe.name }} name to:<input type="text" name="name">
+</form>
+</br>
+
+<form method="post" action="/recipe/{{ recipe.recipe_id }}?_method=DELETE">
+    <input type="hidden" name="_method" value="DELETE">
+        Delete {{ recipe.name }}<input type="submit">
+</form>
+
+delete recipe
+update recipe
+show all ingredients
 
 {% endblock %}
