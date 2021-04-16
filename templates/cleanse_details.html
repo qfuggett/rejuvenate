@@ -26,6 +26,22 @@
             {% break %}
         {% endfor %}
         </ul>
+        </br>
+        {% if cleanse_logs %}
+        <h2>My Logs Throughout The Day....</h2>
+            {% for log in cleanse_logs %}
+            <ul>
+                <li>{{ log.comment }}</li>
+            </ul>
+            {% endfor %}
+        {% endif %}
+        <h2>How Are You Feeling Right Now?</h2>
+            <form action="/cleanse/{{ user_cleanse.user_cleanse_id }}" method="POST">
+                <textarea name="comment" rows="4" cols="30"></textarea>
+                </br>
+                Private? <input type="checkbox" name="private" checked>
+                <input type="submit" value="Complete Log">
+            </form>
     {% endif %}
     
 {% endblock %}

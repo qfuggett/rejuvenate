@@ -132,42 +132,71 @@ def user_cleanses():
     return render_template('user_cleanses.html', user_cleanses=user_cleanses)
 
 
-@app.route('/cleanse/<user_cleanse_id>')
+@app.route('/cleanse/<user_cleanse_id>', methods=['GET', 'POST'])
 def user_cleanse_recipes(user_cleanse_id):
-    """Shows recipes/smoothies that belong to a specific cleanse and their ingredients"""
+    """Shows recipes/smoothies that belong to a specific cleanse and their ingredients
+        Users can also submit an entry to their cleanse log for a specific cleanse"""
 
-    user_cleanse = crud.get_user_cleanse(user_cleanse_id)
-    user_cleanse_recipes = crud.get_user_cleanse_recipes(user_cleanse_id)
-    session['user_cleanse_id'] = user_cleanse_id
-    count = 0
+    if request.method == 'POST':
 
-    return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes, user_cleanse=user_cleanse, count=count)
+        timestamp = datetime.now()
+        comment = request.form.get('comment')
+        private = request.form.get('private')
+
+        if private == 'on':
+            private = False
+        else:
+            private = True
+
+        user_cleanse = crud.get_user_cleanse(user_cleanse_id)
+        crud.create_cleanse_log(timestamp, comment, private, user_cleanse)
+
+        return redirect('/user_cleanses')
+    else:
+
+        user_cleanse = crud.get_user_cleanse(user_cleanse_id)
+        user_cleanse_recipes = crud.get_user_cleanse_recipes(user_cleanse_id)
+        session['user_cleanse_id'] = user_cleanse_id
+        cleanse_logs = crud.get_cleanse_logs(user_cleanse_id)
+
+        return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes, user_cleanse=user_cleanse, cleanse_logs=cleanse_logs)
+
 
 
 @app.route('/all_ingredients')
 def all_ingredients():
 
+    search = request.form.get('name')
+
     app_key = os.environ['app_key']
     app_id = os.environ['app_id']
-    payload = {'ingr': 'orange', 'app_id': app_id, 'app_key': app_key}
+    # payload = {'ingr': 'orange', 'app_id': app_id, 'app_key': app_key}
+    payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
     url = 'https://api.edamam.com/api/food-database/v2/parser'
     res = requests.get(url, params=payload)
     print('*********************************************************************************************')
     print(res.url)
-    data = res.json()
+    ingredient = res.json()
 
-    ingredient = data['hints'][1]
+    # ingredient = data['hints'][1]
 
 
-    print('*********************************************************************************************')
-    print(ingredient.keys())
-    print('*********************************************************************************************')
-    print(ingredient['food'])
-    print('*********************************************************************************************')
-    print(ingredient['measures'])
+    # print('*********************************************************************************************')
+    # print(ingredient.keys())
+    # print('*********************************************************************************************')
+    # print(ingredient['food'])
+    # print('*********************************************************************************************')
+    # print(ingredient['measures'])
 
 
     return render_template('all_ingredients.html', ingredients=ingredient)
+
+
+@app.route('/ingredients/search')
+def ingredients_search():
+    """A list of all ingredients that a user has searched by keyword"""
+
+    return render_template('homepage.html')
 
 
 

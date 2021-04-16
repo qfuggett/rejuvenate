@@ -189,6 +189,13 @@ def create_cleanse_log(timestamp, comment, private, user_cleanse):
     return cleanse_log
 
 
+def get_cleanse_logs(user_cleanse_id):
+    """Shows all cleanse logs for a specific user cleanse"""
+
+
+    return CleanseLog.query.filter(CleanseLog.user_cleanse_id == user_cleanse_id).all()
+
+
 
 
 
