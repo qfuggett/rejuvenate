@@ -3,11 +3,15 @@
 
 {% block body %}
   {{ ingredients }}
+  this should be inside a form with checkboxes next to each ingredients, and it is a post request to /recipe/{{ recipe_id }}/add-ingredient
+  pass in the recipe id
 </br>
-<h3>Search for your ingredients:</h3>
-<form method='GET' action="/ingredients/search">
+<h3>Search for more ingredients:</h3>
+<form method='GET' action="/recipe/{{ recipe_id }}/add-ingredient">
   Ingredient: <input type="text" name="name">
   <input type="submit" value="Search">
 
 </form>
+
+
 {% endblock %}

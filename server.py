@@ -48,24 +48,48 @@ def all_recipes():
                             cleanses=cleanses, recipe_ingredients=recipe_ingredients)
 
 
-@app.route('/recipe/<recipe_id>', methods=['GET', 'POST', 'PUT'])
+@app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
-    """Shows specific recipe information"""
+    """Shows ingredients of a specific recipe and allows user to start search to API to add an ingredient"""
 
     recipe = crud.get_recipe_by_id(recipe_id)
     recipe_ingredients = crud.get_recipe_ingredients_by_id(recipe_id)
 
-    if request.method == 'POST':
+    
+    return render_template('recipe_details.html', recipe=recipe, recipe_ingredients=recipe_ingredients)
 
-        db.session.delete()
-        db.session.commit()
-        
-        return redirect('/user_cleanses')
-    elif request.method == 'PUT':
 
-        return redirect('/user_cleanses')
-    else:
-        return render_template('recipe_details.html', recipe=recipe, recipe_ingredients=recipe_ingredients)
+
+@app.route('/recipe/<recipe_id>/add-ingredient', methods=['GET', 'POST'])
+def add_ingredient_from_API(recipe_id):
+    """Shows data from API and allows users to select their ingredients and post it to the database"""
+
+    # the get searches the api and shows all ingredients view
+    # post: user can select ingredients and add to database
+    #look into request.args
+    
+
+    search = request.form.get('name')
+    app_key = os.environ['app_key']
+    app_id = os.environ['app_id']
+    payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
+    url = 'https://api.edamam.com/api/food-database/v2/parser'
+    res = requests.get(url, params=payload)
+    print('*********************************************************************************************')
+    print(res.url)
+    ingredient = res.json()
+
+    # ingredient = data['hints'][1]
+
+
+    # print('*********************************************************************************************')
+    # print(ingredient.keys())
+    # print('*********************************************************************************************')
+    # print(ingredient['food'])
+    # print('*********************************************************************************************')
+    # print(ingredient['measures'])
+
+    return render_template('all_ingredients.html', ingredients=ingredient, recipe_id=recipe_id)
 
 
 @app.route('/add_recipe/<user_cleanse_id>', methods=['GET', 'POST'])
@@ -121,7 +145,6 @@ def add_recipe_empty(user_cleanse_id):
 
 
 
-
 @app.route('/user_cleanses')
 def user_cleanses():
     """Shows all cleanses for a specific user"""
@@ -160,43 +183,6 @@ def user_cleanse_recipes(user_cleanse_id):
         cleanse_logs = crud.get_cleanse_logs(user_cleanse_id)
 
         return render_template('cleanse_details.html', user_cleanse_recipes=user_cleanse_recipes, user_cleanse=user_cleanse, cleanse_logs=cleanse_logs)
-
-
-
-@app.route('/all_ingredients')
-def all_ingredients():
-
-    search = request.form.get('name')
-
-    app_key = os.environ['app_key']
-    app_id = os.environ['app_id']
-    # payload = {'ingr': 'orange', 'app_id': app_id, 'app_key': app_key}
-    payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
-    url = 'https://api.edamam.com/api/food-database/v2/parser'
-    res = requests.get(url, params=payload)
-    print('*********************************************************************************************')
-    print(res.url)
-    ingredient = res.json()
-
-    # ingredient = data['hints'][1]
-
-
-    # print('*********************************************************************************************')
-    # print(ingredient.keys())
-    # print('*********************************************************************************************')
-    # print(ingredient['food'])
-    # print('*********************************************************************************************')
-    # print(ingredient['measures'])
-
-
-    return render_template('all_ingredients.html', ingredients=ingredient)
-
-
-@app.route('/ingredients/search')
-def ingredients_search():
-    """A list of all ingredients that a user has searched by keyword"""
-
-    return render_template('homepage.html')
 
 
 

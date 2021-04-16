@@ -10,19 +10,11 @@
 {% endfor %}
 </br>
 
-<form action="/recipe/{{ recipe.recipe_id }}?_method=PUT" method="post">
-    <input type="hidden" name="_method" value="PUT">
-    Change {{ recipe.name }} name to:<input type="text" name="name">
-</form>
-</br>
+<h3>Add an ingredient:</h3>
+<form method='POST' action="/recipe/{{ recipe.recipe_id }}/add-ingredient">
+  Ingredient: <input type="text" name="name">
+  <input type="submit" value="Search">
 
-<form method="post" action="/recipe/{{ recipe.recipe_id }}?_method=DELETE">
-    <input type="hidden" name="_method" value="DELETE">
-        Delete {{ recipe.name }}<input type="submit">
 </form>
-
-delete recipe
-update recipe
-show all ingredients
 
 {% endblock %}
