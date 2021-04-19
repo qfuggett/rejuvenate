@@ -5,7 +5,8 @@
 <h2>Ingredients in {{ recipe.name }}:</h2>
 {% for recipe_ingredient in recipe_ingredients %}
 <ul>
-    <li>{{ recipe_ingredient.ingredient.name }}, Calories: {{ recipe_ingredient.ingredient.calories }}</li>
+    <li>{{ recipe_ingredient.ingredient.name }}, 
+      Calories: {{ recipe_ingredient.ingredient.calories }}</li>
 </ul>
 {% endfor %}
 </br>

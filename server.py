@@ -68,28 +68,33 @@ def add_ingredient_from_API(recipe_id):
     # post: user can select ingredients and add to database
     #look into request.args
     
+    if request.method == 'GET':
+       name = request.form.get('name')
 
-    search = request.form.get('name')
-    app_key = os.environ['app_key']
-    app_id = os.environ['app_id']
-    payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
-    url = 'https://api.edamam.com/api/food-database/v2/parser'
-    res = requests.get(url, params=payload)
-    print('*********************************************************************************************')
-    print(res.url)
-    ingredient = res.json()
+       return redirect('user_cleanses')
+    else:
 
-    # ingredient = data['hints'][1]
+        search = request.form.get('name')
+        app_key = os.environ['app_key']
+        app_id = os.environ['app_id']
+        payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
+        url = 'https://api.edamam.com/api/food-database/v2/parser'
+        res = requests.get(url, params=payload)
+        print('*********************************************************************************************')
+        print(res.url)
+        data = res.json()
+
+        ingredient = data['hints']
 
 
-    # print('*********************************************************************************************')
-    # print(ingredient.keys())
-    # print('*********************************************************************************************')
-    # print(ingredient['food'])
-    # print('*********************************************************************************************')
-    # print(ingredient['measures'])
+        print('*********************************************************************************************')
+        print(data.keys())
+        # print('*********************************************************************************************')
+        # print(ingredient['hints'])
+        # print('*********************************************************************************************')
+        # print(ingredient['measures'])
 
-    return render_template('all_ingredients.html', ingredients=ingredient, recipe_id=recipe_id)
+        return render_template('all_ingredients.html', ingredients=ingredient, recipe_id=recipe_id)
 
 
 @app.route('/add_recipe/<user_cleanse_id>', methods=['GET', 'POST'])

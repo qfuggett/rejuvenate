@@ -2,16 +2,22 @@
 {% block title %}api dictionary{% endblock %}
 
 {% block body %}
-  {{ ingredients }}
-  this should be inside a form with checkboxes next to each ingredients, and it is a post request to /recipe/{{ recipe_id }}/add-ingredient
-  pass in the recipe id
-</br>
-<h3>Search for more ingredients:</h3>
-<form method='GET' action="/recipe/{{ recipe_id }}/add-ingredient">
-  Ingredient: <input type="text" name="name">
-  <input type="submit" value="Search">
+  {% for ingredient in ingredients %}
+    <p>
+      <form>
+        <li><b>{{ ingredient['food']['label'] }}:</b> {{ ingredient['food']['nutrients']['ENERC_KCAL'] }} calories</li>
+        <input type="radio" name="name"/>
+        <input type="hidden" name="calories"/>
+        <input type="submit" value="Select Ingredient"/>
+      </form>
+    </p>
 
-</form>
+  {% endfor %}
+  <p>
+    this should be inside a form with checkboxes next to each ingredients, and it is a post request to /recipe/{{ recipe_id }}/add-ingredient
+    pass in the recipe id
+  </p>
+</br>
 
 
 {% endblock %}
