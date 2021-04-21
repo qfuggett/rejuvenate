@@ -4,10 +4,10 @@
 {% block body %}
   {% for ingredient in ingredients %}
     <p>
-      <form>
-        <li><b>{{ ingredient['food']['label'] }}:</b> {{ ingredient['food']['nutrients']['ENERC_KCAL'] }} calories</li>
-        <input type="radio" name="name"/>
-        <input type="hidden" name="calories"/>
+      <form method='POST' action="/recipe/{{ recipe_id }}/add-ingredient">
+        <li id="ingredient-item"><b>{{ ingredient['food']['label'] }}:</b> {{ ingredient['food']['nutrients']['ENERC_KCAL'] }} calories</li>
+        <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
+        <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
         <input type="submit" value="Select Ingredient"/>
       </form>
     </p>

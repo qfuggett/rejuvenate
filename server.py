@@ -68,18 +68,18 @@ def add_ingredient_from_API(recipe_id):
     # post: user can select ingredients and add to database
     #look into request.args
     
-    if request.method == 'GET':
+    if request.method == 'POST':
        name = request.form.get('name')
 
        return redirect('user_cleanses')
     else:
 
-        search = request.form.get('name')
+        search = request.args.get('name')
         app_key = os.environ['app_key']
         app_id = os.environ['app_id']
         payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
         url = 'https://api.edamam.com/api/food-database/v2/parser'
-        res = requests.get(url, params=payload)
+        res = requests.get(url, params=payload) #interacting directly with API
         print('*********************************************************************************************')
         print(res.url)
         data = res.json()
