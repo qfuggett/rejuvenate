@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}api dictionary{% endblock %}
+{% block title %}Fetching From Food Database . . . .{% endblock %}
 
 {% block body %}
   {% for ingredient in ingredients %}
     <p>
       <form method='POST' action="/recipe/{{ recipe_id }}/add-ingredient">
-        <li id="ingredient-item"><b>{{ ingredient['food']['label'] }}:</b> {{ ingredient['food']['nutrients']['ENERC_KCAL'] }} calories</li>
+        <li id="ingredient-item"><b>{{ ingredient['food']['label'] }}:</b> {{ (ingredient['food']['nutrients']['ENERC_KCAL'])|int }} calories</li>
         <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
         <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
         <input type="submit" value="Select Ingredient"/>
@@ -13,11 +13,4 @@
     </p>
 
   {% endfor %}
-  <p>
-    this should be inside a form with checkboxes next to each ingredients, and it is a post request to /recipe/{{ recipe_id }}/add-ingredient
-    pass in the recipe id
-  </p>
-</br>
-
-
 {% endblock %}

@@ -16,6 +16,7 @@
 
     {% endif %}
     {% if user_cleanse_recipes|length >= 1 %}
+        <h2>Dates: {{ user_cleanse.cleanse.start_date.strftime("%A %d %B %Y") }} - {{ user_cleanse.cleanse.end_date.strftime("%A %d %B %Y") }}</h2>
         <h2>Smoothies in this Cleanse:</h2>
         <ul>
         {% for user_cleanse_recipe in user_cleanse_recipes %}
@@ -26,7 +27,6 @@
             {% break %}
         {% endfor %}
         </ul>
-        <h3>Dates: {{ user_cleanse.cleanse.start_date }} - {{ user_cleanse.cleanse.end_date }}</h3>
     {% endif %}
         </br>
         {% if cleanse_logs %}
@@ -44,5 +44,8 @@
                 Private? <input type="checkbox" name="private" checked>
                 <input type="submit" value="Complete Log">
             </form>
+        </br>
+        <a href="/user_cleanses">Go Back</a>
+
     
 {% endblock %}

@@ -8,6 +8,7 @@ import crud
 import requests 
 import json
 import os
+import re
 
 
 
@@ -69,12 +70,20 @@ def add_ingredient_from_API(recipe_id):
     #look into request.args
     
     if request.method == 'POST':
-       name = request.form.get('name')
+        name_string = request.form.get('name')
+        name = name_string.replace("/", "")
+        calories_string = request.form.get('calories')
+        calories = int(float(calories_string.replace("/", "")))
+        recipe = crud.get_recipe_by_id(recipe_id)
 
-       return redirect('user_cleanses')
+        ingredient = crud.create_ingredient(name, calories)
+        crud.create_recipe_ingredient(recipe, ingredient)
+
+
+        return redirect(f'/recipe/{recipe_id}')
     else:
 
-        search = request.args.get('name')
+        search = request.args.get('name') #must use request.args.get for GET requests
         app_key = os.environ['app_key']
         app_id = os.environ['app_id']
         payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
@@ -210,6 +219,8 @@ def start_cleanse():
 
         cleanse = crud.create_cleanse(start_date, end_date, public, description, user)
         crud.create_user_cleanse(True, False, cleanse, user)
+
+
         return redirect('/user_cleanses')
 
     else:
