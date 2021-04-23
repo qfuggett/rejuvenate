@@ -197,7 +197,21 @@ def get_cleanse_logs(user_cleanse_id):
 
 
 
+def create_global_comment(global_comment):
+    """Creates a comment"""
 
+    global_comment = GlobalComment(global_comment=global_comment)
+
+    db.session.add(global_comment)
+    db.session.commit()
+
+    return global_comment
+
+
+def get_global_comments():
+    """Returns all global comments"""
+
+    return GlobalComment.query.all()
 
 
 if __name__ == '__main__':

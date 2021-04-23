@@ -144,6 +144,23 @@ class CleanseLog(db.Model):
 
 
 
+class GlobalComment(db.Model):
+    """Allows all users to make a comment viewable by all registered users"""
+
+    __tablename__ = 'global_comments'
+
+    global_comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    global_comment = db.Column(db.Text, nullable=False)
+
+    user = db.relationship('User', backref='global_comments')
+
+    def __repr__(self):
+        return f'<GlobalComment global_comment_id={self.global_comment_id} user_id={self.user_id} global_comment={self.global_comment}'
+
+
+
+
 def connect_to_db(flask_app, db_uri='postgresql:///rejuvenate', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
