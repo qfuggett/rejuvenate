@@ -208,6 +208,7 @@ def create_global_comment(global_comment):
     return global_comment
 
 
+
 def get_global_comments():
     """Returns all global comments"""
 

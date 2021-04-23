@@ -156,7 +156,7 @@ class GlobalComment(db.Model):
     user = db.relationship('User', backref='global_comments')
 
     def __repr__(self):
-        return f'<GlobalComment global_comment_id={self.global_comment_id} user_id={self.user_id} global_comment={self.global_comment}'
+        return f'<GlobalComment global_comment_id={self.global_comment_id} user_id={self.user_id} global_comment={self.global_comment}>'
 
 
 
