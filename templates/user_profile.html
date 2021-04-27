@@ -9,7 +9,7 @@
     <li>Name: {{ user.name }}</li>
     <li>Location: {{ user.location }}</li>
     <li>About: {{ user.about }}</li>
-    <li>Date Joined: {{ user.member_since }}</li>
+    <li>Date Joined: {{ user.member_since.strftime("%A %d %B %Y") }}</li>
   </ul>
   <br>
   <a href="/">Go Back</a>

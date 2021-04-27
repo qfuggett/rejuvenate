@@ -307,6 +307,13 @@ def logout():
     return redirect('/')
 
 
+@app.route('/community')
+def community():
+    """Community Page that allows users to post a global comment or picture"""
+
+
+    return render_template('community.html')
+
 
 
 
