@@ -8,9 +8,16 @@
         <li id="ingredient-item"><b>{{ ingredient['food']['label'] }}:</b> {{ (ingredient['food']['nutrients']['ENERC_KCAL'])|int }} calories</li>
         <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
         <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
+        <select name="measurement" id="measurement">
+          <option value=""></option>
+          <option value="whole">Whole Package</option>
+          <option value="sliced">Sliced</option>
+          <option value="cup">Cup</option>
+          <option value="ounce">Ounce</option>
+        </select>
         <input type="submit" value="Select Ingredient"/>
       </form>
     </p>
-
+    {# {{ ingredient }}  user gives ounces and I calculate calories#}
   {% endfor %}
 {% endblock %}

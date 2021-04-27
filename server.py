@@ -188,7 +188,7 @@ def user_cleanse_recipes(user_cleanse_id):
         user_cleanse = crud.get_user_cleanse(user_cleanse_id)
         crud.create_cleanse_log(timestamp, comment, private, user_cleanse)
 
-        return redirect('/user_cleanses')
+        return redirect(f'/cleanse/{user_cleanse_id}')
     else:
 
         user_cleanse = crud.get_user_cleanse(user_cleanse_id)
@@ -307,10 +307,20 @@ def logout():
     return redirect('/')
 
 
-@app.route('/community')
+@app.route('/community', methods=['GET', 'POST'])
 def community():
     """Community Page that allows users to post a global comment or picture"""
+    if the method is get:
+        query the database for all globalcomments (crud)
+        pass into render template to show in the html in jinja for loop
 
+    if post:
+        crud for creating a new globalcomment 
+        user id is stored in session
+        request.form.get to get information out of form
+
+        since i'm using ajax, instead of returning rendertemplate, return 'success'
+        in ajax, use preventdefault
 
     return render_template('community.html')
 
