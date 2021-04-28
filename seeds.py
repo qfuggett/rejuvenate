@@ -61,7 +61,7 @@ SEED = {
             }
         },
         'global_comments': {
-            'comment': 'How is everyone doing?!',
+            'comment': 'How is everyone doing?!'
         }
     },
     'Danielle': {
@@ -285,7 +285,8 @@ for i in SEED:
     calories_3 = SEED[i]['ingredients'][3]['calories']
     measurement_3 = SEED[i]['ingredients'][3]['measurement']
 
-    global_comment = SEED[i]['global_comments']['comment']
+    global_comment_dict = SEED[i].get('global_comments', {'comment': 'test'})
+    global_comment = global_comment_dict['comment']
 
 
     db_user = crud.create_user(username, email, password, name, location, about, member_since)
