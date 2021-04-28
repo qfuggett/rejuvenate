@@ -46,17 +46,23 @@ SEED = {
         'ingredients': {
             1: {
                 'name': 'orange',
-                'calories': 15
+                'calories': 15,
+                'measurement': 'whole'
             }, 
             2: {
                 'name': 'banana',
-                'calories': 45
+                'calories': 45,
+                'measurement': 'whole'
             },
             3: {
                 'name': 'grapefruit',
-                'calories': 30
+                'calories': 30,
+                'measurement': 'whole'
             }
         },
+        'global_comments': {
+            'comment': 'How is everyone doing?!',
+        }
     },
     'Danielle': {
         'info': {
@@ -89,15 +95,18 @@ SEED = {
         'ingredients': {
             1: {
                 'name': 'blueberries',
-                'calories': 10
+                'calories': 10,
+                'measurement': 'cup'
             }, 
             2: {
                 'name': 'blackberries',
-                'calories': 10
+                'calories': 10,
+                'measurement': 'cup'
             },
             3: {
                 'name': 'peaches',
-                'calories': 45
+                'calories': 45,
+                'measurement': 'whole'
             }
         },
     },
@@ -132,15 +141,18 @@ SEED = {
         'ingredients': {
             1: {
                 'name': 'apples',
-                'calories': 65
+                'calories': 65,
+                'measurement': 'sliced'
             }, 
             2: {
                 'name': 'banana',
-                'calories': 45
+                'calories': 45,
+                'measurement': 'whole'
             },
             3: {
                 'name': 'almond milk',
-                'calories': 100
+                'calories': 100,
+                'measurement': 'cup'
             }
         },
     },
@@ -175,15 +187,18 @@ SEED = {
         'ingredients': {
             1: {
                 'name': 'pomegranate juice',
-                'calories': 65
+                'calories': 65,
+                'measurement': 'cup'
             }, 
             2: {
                 'name': 'cherries',
-                'calories': 45
+                'calories': 45,
+                'measurement': 'ounce'
             },
             3: {
                 'name': 'tomato',
-                'calories': 30
+                'calories': 30,
+                'measurement': 'whole'
             }
         },
     },
@@ -218,15 +233,18 @@ SEED = {
         'ingredients': {
             1: {
                 'name': 'kale',
-                'calories': 25
+                'calories': 25,
+                'measurement': 'ounce'
             }, 
             2: {
                 'name': 'spinach',
-                'calories': 35
+                'calories': 35,
+                'measurement': 'ounce'
             },
             3: {
                 'name': 'almond milk',
-                'calories': 100
+                'calories': 100,
+                'measurement': 'cup'
             }
         },
     }
@@ -259,18 +277,21 @@ for i in SEED:
 
     i_name = SEED[i]['ingredients'][1]['name']
     calories = SEED[i]['ingredients'][1]['calories']
+    measurement_1 = SEED[i]['ingredients'][1]['measurement']
     i_name_2 = SEED[i]['ingredients'][2]['name']
     calories_2 = SEED[i]['ingredients'][2]['calories']
+    measurement_2 = SEED[i]['ingredients'][2]['measurement']
     i_name_3 = SEED[i]['ingredients'][3]['name']
     calories_3 = SEED[i]['ingredients'][3]['calories']
+    measurement_3 = SEED[i]['ingredients'][3]['measurement']
 
-
+    global_comment = SEED[i]['global_comments']['comment']
 
 
     db_user = crud.create_user(username, email, password, name, location, about, member_since)
-    db_ingredient = crud.create_ingredient(i_name, calories)
-    db_ingredient_2 = crud.create_ingredient(i_name_2, calories_2)
-    db_ingredient_3 = crud.create_ingredient(i_name_3, calories_3)
+    db_ingredient = crud.create_ingredient(i_name, calories, measurement_1)
+    db_ingredient_2 = crud.create_ingredient(i_name_2, calories_2, measurement_2)
+    db_ingredient_3 = crud.create_ingredient(i_name_3, calories_3, measurement_3)
     db_recipe = crud.create_recipe(r_name, db_user)
     db_cleanse = crud.create_cleanse(start_date, end_date, public, description, db_user)
 
@@ -281,4 +302,6 @@ for i in SEED:
     db_user_cleanse = crud.create_user_cleanse(active, completed, db_cleanse, db_user)
     crud.create_user_cleanse_recipe(timestamp, start_date, db_user_cleanse, db_recipe)
     crud.create_cleanse_log(clog_timestamp, comment, private, db_user_cleanse)
+
+    db_comment = crud.create_global_comment(global_comment, db_user)
 

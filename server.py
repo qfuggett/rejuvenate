@@ -75,8 +75,9 @@ def add_ingredient_from_API(recipe_id):
         calories_string = request.form.get('calories')
         calories = int(float(calories_string.replace("/", "")))
         recipe = crud.get_recipe_by_id(recipe_id)
+        measurement = request.form.get('measurement')
 
-        ingredient = crud.create_ingredient(name, calories)
+        ingredient = crud.create_ingredient(name, calories, measurement)
         crud.create_recipe_ingredient(recipe, ingredient)
 
 
@@ -119,10 +120,11 @@ def add_recipe(user_cleanse_id):
         recipe_name = request.form.get('recipe_name')
         ingredient_name = request.form.get('ingredient_name')
         calories = request.form.get('calories')
+        measurement = request.form.get('measurement')
         user = crud.get_user_by_email(session['email'])
 
         recipe = crud.create_recipe(recipe_name, user)
-        ingredient = crud.create_ingredient(ingredient_name, calories)
+        ingredient = crud.create_ingredient(ingredient_name, calories, measurement)
 
         crud.create_recipe_ingredient(recipe, ingredient)
         crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
@@ -145,10 +147,11 @@ def add_recipe_empty(user_cleanse_id):
         recipe_name = request.form.get('recipe_name')
         ingredient_name = request.form.get('ingredient_name')
         calories = request.form.get('calories')
+        measurement = request.form.get('measurement')
         user = crud.get_user_by_email(session['email'])
 
         recipe = crud.create_recipe(recipe_name, user)
-        ingredient = crud.create_ingredient(ingredient_name, calories)
+        ingredient = crud.create_ingredient(ingredient_name, calories, measurement)
 
         crud.create_recipe_ingredient(recipe, ingredient)
         crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
@@ -310,19 +313,29 @@ def logout():
 @app.route('/community', methods=['GET', 'POST'])
 def community():
     """Community Page that allows users to post a global comment or picture"""
-    if the method is get:
-        query the database for all globalcomments (crud)
-        pass into render template to show in the html in jinja for loop
+    # if the method is get:
+    #     query the database for all globalcomments (crud)
+    #     pass into render template to show in the html in jinja for loop
 
-    if post:
-        crud for creating a new globalcomment 
-        user id is stored in session
-        request.form.get to get information out of form
+    # if post:
+    #     crud for creating a new globalcomment 
+    #     user id is stored in session
+    #     request.form.get to get information out of form
 
-        since i'm using ajax, instead of returning rendertemplate, return 'success'
-        in ajax, use preventdefault
+    #     since i'm using ajax, instead of returning rendertemplate, return 'success'
+    #     in ajax, use preventdefault
 
-    return render_template('community.html')
+    if request.method == 'POST':
+        user = crud.get_user_by_email(session['email'])
+        global_comment = request.form.get('comment')
+        comment = crud.create_global_comment(user_id)
+        flash("Comment Posted!")
+
+        return success
+    else:
+        comments = crud.get_global_comments()
+
+        return render_template('community.html', comments=comments)
 
 
 

@@ -62,10 +62,11 @@ class Ingredient(db.Model):
     ingredient_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     food_data_id = db.Column(db.Integer)
     name = db.Column(db.String)
+    measurement = db.Column(db.String)
     calories = db.Column(db.Integer)
 
     def __repr__(self):
-        return f'<Ingredient ingredient_id={self.ingredient_id} food_data_id={self.food_data_id} name={self.name} calories={self.calories}>'
+        return f'<Ingredient ingredient_id={self.ingredient_id} food_data_id={self.food_data_id} name={self.name} calories={self.calories}, measurement={self.measurement}>'
 
 
 class Cleanse(db.Model):

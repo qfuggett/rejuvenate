@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, Recipe, Ingredient, RecipeIngredient, Cleanse, UserCleanse, UserCleanseRecipe, CleanseLog, connect_to_db
+from model import db, User, Recipe, Ingredient, RecipeIngredient, Cleanse, UserCleanse, UserCleanseRecipe, CleanseLog, GlobalComment, connect_to_db
 
 
 
@@ -53,10 +53,10 @@ def get_recipe_by_id(recipe_id):
 
 
 
-def create_ingredient(name, calories):
+def create_ingredient(name, calories, measurement):
     """Creates an ingredient"""
 
-    ingredient = Ingredient(name=name, calories=calories)
+    ingredient = Ingredient(name=name, calories=calories, measurement=measurement)
 
     db.session.add(ingredient)
     db.session.commit()
@@ -197,10 +197,10 @@ def get_cleanse_logs(user_cleanse_id):
 
 
 
-def create_global_comment(global_comment):
+def create_global_comment(global_comment, user):
     """Creates a comment"""
 
-    global_comment = GlobalComment(global_comment=global_comment)
+    global_comment = GlobalComment(global_comment=global_comment, user=user)
 
     db.session.add(global_comment)
     db.session.commit()
