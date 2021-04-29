@@ -2,7 +2,7 @@
 {% block title %}Add a Smoothie to this cleanse{% endblock %}
 
 {% block body %}
-    <h2>Add A Smoothie and ingredients</h2>
+    <h2>Add A Smoothie</h2>
     <form action="/add_recipe/{{ session['user_cleanse_id'] }}" method="POST">
         <p>
             Smoothie Name <input type="text" name="recipe_name">
@@ -17,23 +17,20 @@
         </p>
 
         <p>
-            Ingredient 2 <input type="text" name="ingredient_name">
+            <select name="measurement" id="measurement">
+                <option value=""></option>
+                <option value="whole">Whole Package</option>
+                <option value="sliced">Sliced</option>
+                <option value="cup">Cup</option>
+                <option value="ounce">Ounce</option>
+              </select>
         </p>
 
         <p>
-            Calories <input type="number" name="calories">
-        </p>
-
-        <p>
-            Ingredient 3 <input type="text" name="ingredient_name">
-        </p>
-
-        <p>
-            Calories <input type="number" name="calories">
+            <b><em>Add more ingredients later!</em></b>
         </p>
 
           <input type="submit">
         </p>
       </form>
-      replace ingredients slots with search bar to add ingredients from API
 {% endblock %}

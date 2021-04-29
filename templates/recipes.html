@@ -4,23 +4,24 @@
 {% block body %}
   <h1>All Smoothies in Database!</h1>
 
-  {% for cleanse in cleanses %}
-  <ul>
-    <li>{{ cleanse.description }}</li>
+  <ol>
     {% for recipe in recipes %}
-    <ul>
+    <p>
       <li>{{ recipe.name }}</li>
+      <select name="measurement" id="measurement">
+        <option value="">Ingredients</option>
       {% for ingredient in ingredients %}
         {% for recipe_ingredient in recipe_ingredients %}
-      <ul>
         {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
-        <li>{{ ingredient.name }}</li>
+          <option value="name">{{ ingredient.name }} </option>
         {% endif %}
-      </ul>
         {% endfor %}
       {% endfor %}
-    </ul>
+      </select>
+    </p>
     {% endfor %}
-  </ul>
-  {% endfor %}
+  </ol>
+</br>
+<a href="/">Go Back</a>
+
 {% endblock %}

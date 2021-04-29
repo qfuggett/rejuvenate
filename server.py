@@ -65,10 +65,6 @@ def recipe(recipe_id):
 def add_ingredient_from_API(recipe_id):
     """Shows data from API and allows users to select their ingredients and post it to the database"""
 
-    # the get searches the api and shows all ingredients view
-    # post: user can select ingredients and add to database
-    #look into request.args
-    
     if request.method == 'POST':
         name_string = request.form.get('name')
         name = name_string.replace("/", "")
@@ -90,15 +86,13 @@ def add_ingredient_from_API(recipe_id):
         payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
         url = 'https://api.edamam.com/api/food-database/v2/parser'
         res = requests.get(url, params=payload) #interacting directly with API
-        print('*********************************************************************************************')
-        print(res.url)
         data = res.json()
-
         ingredient = data['hints']
 
-
-        print('*********************************************************************************************')
-        print(data.keys())
+        # print('*********************************************************************************************')
+        # print(res.url)
+        # print('*********************************************************************************************')
+        # print(data.keys())
         # print('*********************************************************************************************')
         # print(ingredient['hints'])
         # print('*********************************************************************************************')
@@ -248,9 +242,6 @@ def sign_up():
         crud.create_user(username, email, password, name, location, about, member_since)
         flash('Account created! Please log in.')
 
-        # flash('Cannot create an account with an existing email address. Try again')
-
-
         return redirect('/login')
     else:
 
@@ -261,7 +252,7 @@ def sign_up():
 def login():
     """User can login with existing account details"""
 
-    if request.method == 'POST': #we want to retrieve data from the form and send it to the next
+    if request.method == 'POST': 
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
@@ -273,15 +264,12 @@ def login():
             session['user_id'] = user.user_id
             flash("Logged in as %s" % username)
 
-        #write if statements: if email matches an email in the users table and the password given also matches the passwords
-        #in that same user record, then create session
-
             return render_template('user_profile.html', user=user)
         else:
             flash("Incorrect information")
             return redirect('/login')
 
-    else: #just going to the /login page
+    else: 
         if 'user' in session:
             return redirect(url_for('user'))
 
@@ -313,17 +301,6 @@ def logout():
 @app.route('/community', methods=['GET', 'POST'])
 def community():
     """Community Page that allows users to post a global comment or picture"""
-    # if the method is get:
-    #     query the database for all globalcomments (crud)
-    #     pass into render template to show in the html in jinja for loop
-
-    # if post:
-    #     crud for creating a new globalcomment 
-    #     user id is stored in session
-    #     request.form.get to get information out of form
-
-    #     since i'm using ajax, instead of returning rendertemplate, return 'success'
-    #     in ajax, use preventdefault
 
     if request.method == 'POST':
         user = crud.get_user_by_id(session['user_id'])
