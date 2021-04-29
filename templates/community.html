@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Chat With Others!{% endblock %}
+
+{% block body %}
+<h3>Connect With Others!</h3>
+    {% for comment in comments %}
+        <ul>
+            <li>{{ comment.user.username }}: {{ comment.global_comment }}</li>
+        </ul>
+    {% endfor %}
+
+<p>
+    <h4>Leave a comment below:</h4>
+    <form action="/community" method="POST">
+        <textarea id ="comment" name="comment" rows="4" cols="30"></textarea>
+        </br>
+        <input type="submit" value="Submit Comment">
+    </form>
+</p>
+</br>
+<a href="/">Go Back</a>
+
+{% endblock %}

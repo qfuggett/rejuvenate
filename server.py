@@ -334,9 +334,8 @@ def community():
         return redirect('/community')
     else:
         comments = crud.get_global_comments()
-        user_comment_name = crud.get_global_comment_by_user(session['user_id'])
 
-        return render_template('community.html', comments=comments, users=users)
+        return render_template('community.html', comments=comments)
 
 
 
