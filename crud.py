@@ -24,6 +24,11 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+def get_user_by_id(user_id):
+    """Returns a users name by user id"""
+
+    return User.query.filter(User.user_id == user_id).first()
+
 
 def create_recipe(name, user):
     """Returns a recipe"""
@@ -213,6 +218,10 @@ def get_global_comments():
     """Returns all global comments"""
 
     return GlobalComment.query.all()
+
+
+def get_global_comment_by_user():
+    """Returns a global comment by a specific user"""
 
 
 if __name__ == '__main__':

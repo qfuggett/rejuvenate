@@ -326,16 +326,17 @@ def community():
     #     in ajax, use preventdefault
 
     if request.method == 'POST':
-        user = crud.get_user_by_email(session['email'])
+        user = crud.get_user_by_id(session['user_id'])
         global_comment = request.form.get('comment')
-        comment = crud.create_global_comment(user_id)
+        comment = crud.create_global_comment(global_comment, user)
         flash("Comment Posted!")
 
-        return success
+        return redirect('/community')
     else:
         comments = crud.get_global_comments()
+        user_comment_name = crud.get_global_comment_by_user(session['user_id'])
 
-        return render_template('community.html', comments=comments)
+        return render_template('community.html', comments=comments, users=users)
 
 
 
