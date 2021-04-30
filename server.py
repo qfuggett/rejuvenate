@@ -237,7 +237,7 @@ def sign_up():
         name = request.form.get('name')
         location = request.form.get('location')
         about = request.form.get('about')
-        member_since = request.form.get('member_since')
+        member_since = datetime.now()
 
         crud.create_user(username, email, password, name, location, about, member_since)
         flash('Account created! Please log in.')

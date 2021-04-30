@@ -2,42 +2,40 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block body %}
-  <h1>Sign Up For An Account</h1>
-
-  <h2>Create an Account</h2>
-  <form action="/signup" method="POST">
-    <p>
-      Username <input type="text" name="username">
-    </p>
+<div class="row">
+    <div class="col-8 offset-8">    
+      <h2>Create an Account</h2>
+      <form action="/signup" method="POST">
+        <p>
+          <input type="text" name="username" placeholder="Username">
+        </p>
+        
+        <p>
+          <input type="text" name="email" placeholder="Email">
+        </p>
     
-    <p>
-      Email <input type="text" name="email">
-    </p>
-
-    <p>
-      Password <input type="password" name="password">
-    </p>
-
-    <p>
-      Name <input type="text" name="name">
-    </p>
-
-    <p>
-      Location <input type="text" name="location">
-    </p>
-
-    <p>
-      About <input type="text" name="about">
-    </p>
-
-    <p>
-      <input type="date" name="member_since">
-    </p>
-
-    <p>
-      <input type="submit">
-    </p>
-  </form>
+        <p>
+          <input type="password" name="password" placeholder="Password">
+        </p>
+    
+        <p>
+          <input type="text" name="name" placeholder="Name">
+        </p>
+    
+        <p>
+          <input type="text" name="location" placeholder="Location">
+        </p>
+    
+        <p>
+          <input type="text" name="about" placeholder="Something About You?">
+        </p>
+    
+        <p>
+          <input type="submit" value="Sign Up!">
+        </p>
+      </form>
+    </div>
+</div>
 
   
 {% endblock %}
