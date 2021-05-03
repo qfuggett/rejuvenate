@@ -26,7 +26,10 @@
         </div>
       </form>
     </div>
-</div>
-
-  
+  </div>
+  {% for msg in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong class="flash-msg">{{ msg }}</strong>
+  </div>
+  {% endfor %}
 {% endblock %}

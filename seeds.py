@@ -293,21 +293,24 @@ for i in SEED:
     i_name = SEED[i]['ingredients'][1]['name']
     calories = SEED[i]['ingredients'][1]['calories']
     measurement_1 = SEED[i]['ingredients'][1]['measurement']
+    photo_1 = SEED[i]['ingredients'][1]['photo']
     i_name_2 = SEED[i]['ingredients'][2]['name']
     calories_2 = SEED[i]['ingredients'][2]['calories']
     measurement_2 = SEED[i]['ingredients'][2]['measurement']
+    photo_2 = SEED[i]['ingredients'][2]['photo']
     i_name_3 = SEED[i]['ingredients'][3]['name']
     calories_3 = SEED[i]['ingredients'][3]['calories']
     measurement_3 = SEED[i]['ingredients'][3]['measurement']
+    photo_3 = SEED[i]['ingredients'][3]['photo']
 
     global_comment_dict = SEED[i].get('global_comments', {'comment': 'test'})
     global_comment = global_comment_dict['comment']
 
 
     db_user = crud.create_user(username, email, password, name, location, about, member_since)
-    db_ingredient = crud.create_ingredient(i_name, calories, measurement_1)
-    db_ingredient_2 = crud.create_ingredient(i_name_2, calories_2, measurement_2)
-    db_ingredient_3 = crud.create_ingredient(i_name_3, calories_3, measurement_3)
+    db_ingredient = crud.create_ingredient(i_name, calories, measurement_1, photo_1)
+    db_ingredient_2 = crud.create_ingredient(i_name_2, calories_2, measurement_2, photo_2)
+    db_ingredient_3 = crud.create_ingredient(i_name_3, calories_3, measurement_3, photo_3)
     db_recipe = crud.create_recipe(r_name, db_user)
     db_cleanse = crud.create_cleanse(start_date, end_date, public, description, db_user)
 

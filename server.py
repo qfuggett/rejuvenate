@@ -284,7 +284,7 @@ def login():
 
             return render_template('user_profile.html', user=user)
         else:
-            flash("Incorrect information")
+            flash("Check your fields and try again.")
             return redirect('/login')
 
     else: 
