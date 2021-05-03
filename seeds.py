@@ -47,17 +47,20 @@ SEED = {
             1: {
                 'name': 'orange',
                 'calories': 15,
-                'measurement': 'whole'
+                'measurement': 'whole',
+                'photo': "https://www.telegraph.co.uk/multimedia/archive/01834/orange_1834038b.jpg"
             }, 
             2: {
                 'name': 'banana',
                 'calories': 45,
-                'measurement': 'whole'
+                'measurement': 'whole',
+                'photo': "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"
             },
             3: {
                 'name': 'grapefruit',
                 'calories': 30,
-                'measurement': 'whole'
+                'measurement': 'whole',
+                'photo': "https://cdn.britannica.com/22/122522-050-6CD1C3E7/Grapefruit.jpg"
             }
         },
         'global_comments': {
@@ -96,17 +99,20 @@ SEED = {
             1: {
                 'name': 'blueberries',
                 'calories': 10,
-                'measurement': 'cup'
+                'measurement': 'cup',
+                'photo': "https://cdn.oregonaitc.org/wp-content/uploads/2020/02/blueberries-690072_640-375x426.jpg"
             }, 
             2: {
                 'name': 'blackberries',
                 'calories': 10,
-                'measurement': 'cup'
+                'measurement': 'cup',
+                'photo': "https://post.healthline.com/wp-content/uploads/2020/03/black-raspberries-732x549-thumbnail.jpg"
             },
             3: {
                 'name': 'peaches',
                 'calories': 45,
-                'measurement': 'whole'
+                'measurement': 'whole',
+                'photo': "https://billsberryfarm.com/wp-content/uploads/2020/08/peach.png"
             }
         },
     },
@@ -142,17 +148,20 @@ SEED = {
             1: {
                 'name': 'apples',
                 'calories': 65,
-                'measurement': 'sliced'
+                'measurement': 'sliced',
+                'photo': "https://s3.amazonaws.com/yummy_uploads2/blog/6398.jpg"
             }, 
             2: {
                 'name': 'banana',
                 'calories': 45,
-                'measurement': 'whole'
+                'measurement': 'whole',
+                'photo': "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"
             },
             3: {
                 'name': 'almond milk',
                 'calories': 100,
-                'measurement': 'cup'
+                'measurement': 'cup',
+                'photo': "https://www.dishbydish.net/wp-content/uploads/How-to-Make-Almond-Milk-Dairy-Free-Vegan_Final2-scaled.jpg"
             }
         },
     },
@@ -188,17 +197,20 @@ SEED = {
             1: {
                 'name': 'pomegranate juice',
                 'calories': 65,
-                'measurement': 'cup'
+                'measurement': 'cup',
+                'photo': "https://cdn-prod.medicalnewstoday.com/content/images/articles/318/318385/halves-pomegranate-with-seeds-and-pomegranate-juice-on-marbled-surface.jpg"
             }, 
             2: {
                 'name': 'cherries',
                 'calories': 45,
-                'measurement': 'ounce'
+                'measurement': 'ounce',
+                'photo': "https://images.ctfassets.net/lufu0clouua1/57roskVwfCWmgkoQW4yQmq/b90cdd9fa2f150ded98625c156358412/Red-Cherries.jpg"
             },
             3: {
                 'name': 'tomato',
                 'calories': 30,
-                'measurement': 'whole'
+                'measurement': 'whole',
+                'photo': "https://media.istockphoto.com/photos/tomato-isolated-on-white-background-picture-id466175630?k=6&m=466175630&s=612x612&w=0&h=fu_mQBjGJZIliOWwCR0Vf2myRvKWyQDsymxEIi8tZ38="
             }
         },
     },
@@ -234,17 +246,20 @@ SEED = {
             1: {
                 'name': 'kale',
                 'calories': 25,
-                'measurement': 'ounce'
+                'measurement': 'ounce',
+                'photo': "https://snaped.fns.usda.gov/sites/default/files/styles/crop_ratio_7_5/public/seasonal-produce/2018-05/kale.jpg?itok=Zn8Cux6F"
             }, 
             2: {
                 'name': 'spinach',
                 'calories': 35,
-                'measurement': 'ounce'
+                'measurement': 'ounce',
+                'photo': "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/270609_2200-732x549.jpg"
             },
             3: {
                 'name': 'almond milk',
                 'calories': 100,
-                'measurement': 'cup'
+                'measurement': 'cup',
+                'photo': "https://www.dishbydish.net/wp-content/uploads/How-to-Make-Almond-Milk-Dairy-Free-Vegan_Final2-scaled.jpg"
             }
         },
     }

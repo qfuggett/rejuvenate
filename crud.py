@@ -58,10 +58,10 @@ def get_recipe_by_id(recipe_id):
 
 
 
-def create_ingredient(name, calories, measurement):
+def create_ingredient(name, calories, measurement, photo):
     """Creates an ingredient"""
 
-    ingredient = Ingredient(name=name, calories=calories, measurement=measurement)
+    ingredient = Ingredient(name=name, calories=calories, measurement=measurement, photo=photo)
 
     db.session.add(ingredient)
     db.session.commit()

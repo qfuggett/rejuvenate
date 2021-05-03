@@ -64,9 +64,10 @@ class Ingredient(db.Model):
     name = db.Column(db.String)
     measurement = db.Column(db.String)
     calories = db.Column(db.Integer)
+    photo = db.Column(db.String)
 
     def __repr__(self):
-        return f'<Ingredient ingredient_id={self.ingredient_id} food_data_id={self.food_data_id} name={self.name} calories={self.calories}, measurement={self.measurement}>'
+        return f'<Ingredient ingredient_id={self.ingredient_id} food_data_id={self.food_data_id} name={self.name} calories={self.calories}, measurement={self.measurement}, photo={self.photo}>'
 
 
 class Cleanse(db.Model):
