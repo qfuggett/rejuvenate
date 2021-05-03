@@ -15,9 +15,9 @@
 
 <p>
   <h3>Add an ingredient:</h3>
-  <form action="/recipe/{{ recipe.recipe_id }}/add-ingredient">
-    Ingredient: <input type="text" name="name">
-    <input type="submit" value="Search">
+  <form class="form-inline" action="/recipe/{{ recipe.recipe_id }}/add-ingredient">
+    Ingredient: <input class="form-control mr-sm-2" type="text" name="name">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
 </p>
 <a href="/recipe/{{ recipe.recipe_id }}"">Go Back</a>

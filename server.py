@@ -101,6 +101,24 @@ def add_ingredient_from_API(recipe_id):
         return render_template('all_ingredients.html', ingredients=ingredient, recipe_id=recipe_id)
 
 
+@app.route('/search')
+def search():
+    """Search API to simply show ingredients"""
+
+    search = request.args.get('name') #must use request.args.get for GET requests
+    app_key = os.environ['app_key']
+    app_id = os.environ['app_id']
+    payload = {'ingr': search, 'app_id': app_id, 'app_key': app_key}
+    url = 'https://api.edamam.com/api/food-database/v2/parser'
+    res = requests.get(url, params=payload) #interacting directly with API
+    data = res.json()
+    ingredient = data['hints']
+
+
+    return render_template('all_ingredients.html', ingredients=ingredient, recipe_id=recipe_id)
+
+
+
 @app.route('/add_recipe/<user_cleanse_id>', methods=['GET', 'POST'])
 def add_recipe(user_cleanse_id):
     """Add a smoothie/recipe to a cleanse that already has recipes"""

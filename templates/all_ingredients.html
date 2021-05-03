@@ -5,19 +5,25 @@
   {% for ingredient in ingredients %}
     <p>
       <form method='POST' action="/recipe/{{ recipe_id }}/add-ingredient">
-        <li id="ingredient-item"><b>{{ ingredient['food']['label'] }}:</b> {{ (ingredient['food']['nutrients']['ENERC_KCAL'])|int }} calories</li>
-        <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
-        <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
-        <select name="measurement" id="measurement">
-          <option value=""></option>
-          <option value="whole">Whole Package</option>
-          <option value="sliced">Sliced</option>
-          <option value="cup">Cup</option>
-          <option value="ounce">Ounce</option>
-        </select>
-        <input type="submit" value="Select Ingredient"/>
+        <div class="card" style="width: 18rem;"></div>
+          <img class="card-img-top" style="width: 18em;" src={{ ingredient['food']['image']}} alt={{ ingredient['food']['label'] }}>
+          <div class="card-body">
+            <h5 class="card-title" id="ingredient-item"><b>{{ ingredient['food']['label'] }}</h5>
+            <p class="card-text">{{ (ingredient['food']['nutrients']['ENERC_KCAL'])|int }} calories</p>
+            <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
+            <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
+            <select name="measurement" id="measurement">
+              <option value=""></option>
+              <option value="whole">Whole Package</option>
+              <option value="sliced">Sliced</option>
+              <option value="cup">Cup</option>
+              <option value="ounce">Ounce</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Select Ingredient</button>
+          </div>
+        </div>
       </form>
     </p>
-    {# {{ ingredient }}  user gives ounces and I calculate calories#}
+    <!-- <img src={{ ingredient['food']['image'] }}>  user gives ounces and I calculate calories -->
   {% endfor %}
 {% endblock %}
