@@ -249,6 +249,7 @@ def sign_up():
     """User can sign up for an account"""
 
     if request.method == 'POST':
+
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
@@ -256,6 +257,11 @@ def sign_up():
         location = request.form.get('location')
         about = request.form.get('about')
         member_since = datetime.now()
+
+        if username or email or password == "":
+            flash('Please complete all fields')
+
+            return redirect('/signup')
 
         crud.create_user(username, email, password, name, location, about, member_since)
         flash('Account created! Please log in.')
