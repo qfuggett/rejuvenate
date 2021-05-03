@@ -9,12 +9,17 @@
       </div>
     </div>
   {% else %}
-    <p>
-      <h3>Search over 900,000 food items:</h3>
-      <form action="/search" class="form-inline">
-        <input class="form-control mr-sm-2" type="text" name="name">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </p>
+    <div class="row">
+      <div class="col">
+        <img style="width: 30em;" src="/static/img/alex-loup--ZvC04d-xLw-unsplash.jpg">
+      </div>
+      <div class="col">
+        <h3>Search over 900,000 food items:</h3>
+        <form action="/search" class="form-inline">
+          <input class="form-control mr-sm-2" type="text" name="name">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
   {% endif %}
 {% endblock %}
