@@ -325,7 +325,7 @@ def logout():
 @app.route('/community', methods=['GET', 'POST'])
 def community():
     """Community Page that allows users to post a global comment or picture"""
-
+    
     if request.method == 'POST':
         user = crud.get_user_by_id(session['user_id'])
         global_comment = request.form.get('comment')

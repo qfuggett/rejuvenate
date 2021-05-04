@@ -2,14 +2,38 @@
 {% block title %}Chat With Others!{% endblock %}
 
 {% block body %}
-<h3>Connect With Others!</h3>
+<!-- <h3>Connect With Others!</h3>
     {% for comment in comments %}
         <ul>
             <li>{{ comment.user.username }}: {{ comment.global_comment }}</li>
         </ul>
-    {% endfor %}
+    {% endfor %} -->
 
-<p>
+    <div class="container mb-5 mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center mb-5"> Nested comment section </h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="media"> <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+                                <div class="media-body">
+                                    <div class="row">
+                                        <div class="col-8 d-flex">
+                                            <h5>Maria Smantha</h5> <span>- 2 hours ago</span>
+                                        </div>
+                                    <div> It is a long established fact that a reader will be distracted by the readable content of a page. <div class="media mt-4"> <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- <p>
     <h4>Leave a comment below:</h4>
     <form action="/community" method="POST">
         <textarea id ="comment" name="comment" rows="4" cols="30"></textarea>
@@ -18,6 +42,6 @@
     </form>
 </p>
 </br>
-<a href="/">Go Back</a>
+<a href="/">Go Back</a> -->
 
 {% endblock %}
