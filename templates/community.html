@@ -9,22 +9,27 @@
         </ul>
     {% endfor %} -->
 
-    <div class="container mb-5 mt-5">
-        <div class="card">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="text-center mb-5"> Nested comment section </h3>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="media"> <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
-                                <div class="media-body">
-                                    <div class="row">
-                                        <div class="col-8 d-flex">
-                                            <h5>Maria Smantha</h5> <span>- 2 hours ago</span>
-                                        </div>
-                                    <div> It is a long established fact that a reader will be distracted by the readable content of a page. <div class="media mt-4"> <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
-                                    </div>
-                                </div>
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-center row">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column comment-section">
+                        {% for comment in comments %}
+                        <div class="bg-white p-2">
+                            <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://exseedhealth.com/wp-content/uploads/2020/03/Fertility-smoothies-1024x683.jpg" width="40">
+                                <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{ comment.user.username }}</span><span class="date text-black-50">Posted at {{ date }}</span></div>
+                            </div>
+                            <div class="mt-2">
+                                <p class="comment-text">{{ comment.global_comment }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="bg-light p-2">
+    
+                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                <textarea d ="comment" name="comment" class="form-control ml-1 shadow-none textarea"></textarea></div>
+                            <div class="mt-2 text-right">
+                                <button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>
                             </div>
                         </div>
                     </div>
