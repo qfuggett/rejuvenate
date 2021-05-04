@@ -4,48 +4,63 @@
 {% block body %}
 
     {% if user_cleanse_recipes|length == 0 %}
-        <h2>You have no smoothies inside this cleanse...Add one!</h2></br>
-            <ul>
-                {% if user_cleanse.active == True %}
-                <li>Current Cleanse? Yes</li>
-                {% else %}
-                <li>Current Cleanse? No</li>
-                {% endif %}
-                <li><a href="/add_recipe_empty/{{ user_cleanse.user_cleanse_id }}">Add a Smoothie</a></li>
-            </ul>
-
+        <div class="row">
+            <div class="col">
+                <h2>You have no smoothies inside this cleanse...Add one!</h2></br>
+                    <ul>
+                        {% if user_cleanse.active == True %}
+                        <li>Current Cleanse? Yes</li>
+                        {% else %}
+                        <li>Current Cleanse? No</li>
+                        {% endif %}
+                        <li><a href="/add_recipe_empty/{{ user_cleanse.user_cleanse_id }}">Add a Smoothie</a></li>
+                    </ul>
+            </div>
+        </div>
     {% endif %}
+
     {% if user_cleanse_recipes|length >= 1 %}
-        <h2>Dates: {{ user_cleanse.cleanse.start_date.strftime("%A %d %B %Y") }} - {{ user_cleanse.cleanse.end_date.strftime("%A %d %B %Y") }}</h2>
-        <h2>Smoothies in this Cleanse:</h2>
-        <ul>
-        {% for user_cleanse_recipe in user_cleanse_recipes %}
-                <li><a href="/recipe/{{ user_cleanse_recipe.recipe.recipe_id }}">{{ user_cleanse_recipe.recipe.name }}</a></li>
-        {% endfor %}
-        {% for user_cleanse_recipe in user_cleanse_recipes %}
-            <a href="/add_recipe/{{ user_cleanse_recipe.user_cleanse.user_cleanse_id }}">Add another smoothie to this cleanse!</a>
-            {% break %}
-        {% endfor %}
-        </ul>
+    <div class="row">
+        <div class="col">
+            <h2>Dates: {{ user_cleanse.cleanse.start_date.strftime("%A %d %B %Y") }} - {{ user_cleanse.cleanse.end_date.strftime("%A %d %B %Y") }}</h2>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col">
+                <h2>Smoothies in this Cleanse:</h2>
+                <ul>
+                {% for user_cleanse_recipe in user_cleanse_recipes %}
+                        <li><a href="/recipe/{{ user_cleanse_recipe.recipe.recipe_id }}">{{ user_cleanse_recipe.recipe.name }}</a></li>
+                {% endfor %}
+                {% for user_cleanse_recipe in user_cleanse_recipes %}
+                    <a href="/add_recipe/{{ user_cleanse_recipe.user_cleanse.user_cleanse_id }}">Add another smoothie to this cleanse!</a>
+                    {% break %}
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="col offset-3">
+                {% if cleanse_logs %}
+                    <h2>My Logs Throughout The Day....</h2>
+                    {% for log in cleanse_logs %}
+                        <ul>
+                            <li>{{ log.comment }}</li>
+                        </ul>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     {% endif %}
-        </br>
-        {% if cleanse_logs %}
-        <h2>My Logs Throughout The Day....</h2>
-            {% for log in cleanse_logs %}
-            <ul>
-                <li>{{ log.comment }}</li>
-            </ul>
-            {% endfor %}
-        {% endif %}
-        <h2>How Are You Feeling Right Now?</h2>
-            <form action="/cleanse/{{ user_cleanse.user_cleanse_id }}" method="POST">
-                <textarea name="comment" rows="4" cols="30"></textarea>
-                </br>
-                Private? <input type="checkbox" name="private" checked>
-                <input type="submit" value="Complete Log">
-            </form>
-        </br>
-        <a href="/user_cleanses">Go Back</a>
-
+        
+        <div class="row">
+            <div class="col">
+                <h2>How Are You Feeling Right Now?</h2>
+                    <form action="/cleanse/{{ user_cleanse.user_cleanse_id }}" method="POST">
+                        <textarea name="comment" rows="4" cols="30"></textarea>
+                        </br>
+                        Private? <input type="checkbox" name="private" checked>
+                        <input type="submit" value="Complete Log">
+                    </form>
+            </div>
+        </div>
     
 {% endblock %}

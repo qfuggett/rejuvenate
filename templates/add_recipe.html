@@ -2,35 +2,39 @@
 {% block title %}Add a Smoothie to this cleanse{% endblock %}
 
 {% block body %}
-    <h2>Add A Smoothie</h2>
-    <form action="/add_recipe/{{ session['user_cleanse_id'] }}" method="POST">
-        <p>
-            Smoothie Name <input type="text" name="recipe_name">
-        </p>
-
-        <p>
-            Ingredient 1 <input type="text" name="ingredient_name">
-        </p>
-
-        <p>
-            Calories <input type="number" name="calories">
-        </p>
-
-        <p>
-            <select name="measurement" id="measurement">
-                <option value=""></option>
-                <option value="whole">Whole Package</option>
-                <option value="sliced">Sliced</option>
-                <option value="cup">Cup</option>
-                <option value="ounce">Ounce</option>
-              </select>
-        </p>
-
-        <p>
-            <b><em>Add more ingredients later!</em></b>
-        </p>
-
-          <input type="submit">
-        </p>
-      </form>
+    <div class="row">
+        <div class="col">
+            <h2>Add A Smoothie</h2>
+            <form action="/add_recipe/{{ session['user_cleanse_id'] }}" method="POST">
+                <p>
+                    Smoothie Name <input type="text" name="recipe_name">
+                </p>
+        
+                <p>
+                    Ingredient 1 <input type="text" name="ingredient_name">
+                </p>
+        
+                <p>
+                    Calories <input type="number" name="calories">
+                </p>
+        
+                <p>
+                    Measurement
+                    <select name="measurement" id="measurement">
+                        <option value=""></option>
+                        <option value="whole">Whole Package</option>
+                        <option value="sliced">Sliced</option>
+                        <option value="cup">Cup</option>
+                        <option value="ounce">Ounce</option>
+                      </select>
+                </p>
+        
+                <p>
+                    <b><em>Add more ingredients later!</em></b>
+                </p>
+                    <input type="submit" value="Add!">
+                </p>
+              </form>
+        </div>
+    </div>
 {% endblock %}

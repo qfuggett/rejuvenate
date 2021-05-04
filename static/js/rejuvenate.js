@@ -14,7 +14,7 @@ function submitComment(evt) {
     const comment = $('#comment')
 
     $.post('/community', comment, (response) => {
-        $('ul').append(`<li>${response.global_comment}</li>`);
+        $('#d-flex flex-column comment-section').append(`${response.global_comment}`);
     } )
     console.log('posted')
 }

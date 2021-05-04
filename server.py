@@ -29,6 +29,9 @@ def homepage():
 def user_profile():
     """User profile information"""
 
+    if 'user_id' not in session:
+            return redirect('/login')
+
     email = session['email']
     user = crud.get_user_by_email(email)
     
@@ -53,6 +56,9 @@ def all_recipes():
 def recipe(recipe_id):
     """Shows ingredients of a specific recipe and allows user to start search to API to add an ingredient"""
 
+    if 'user_id' not in session:
+            return redirect('/login')
+
     recipe = crud.get_recipe_by_id(recipe_id)
     recipe_ingredients = crud.get_recipe_ingredients_by_id(recipe_id)
 
@@ -72,13 +78,16 @@ def add_ingredient_from_API(recipe_id):
         calories = int(float(calories_string.replace("/", "")))
         recipe = crud.get_recipe_by_id(recipe_id)
         measurement = request.form.get('measurement')
+        photo = request.form.get('photo')
 
-        ingredient = crud.create_ingredient(name, calories, measurement)
+        ingredient = crud.create_ingredient(name, calories, measurement, photo)
         crud.create_recipe_ingredient(recipe, ingredient)
 
 
         return redirect(f'/recipe/{recipe_id}')
     else:
+        if 'user_id' not in session:
+            return redirect('/login')
 
         search = request.args.get('name') #must use request.args.get for GET requests
         app_key = os.environ['app_key']
@@ -88,15 +97,6 @@ def add_ingredient_from_API(recipe_id):
         res = requests.get(url, params=payload) #interacting directly with API
         data = res.json()
         ingredient = data['hints']
-
-        # print('*********************************************************************************************')
-        # print(res.url)
-        # print('*********************************************************************************************')
-        # print(data.keys())
-        # print('*********************************************************************************************')
-        # print(ingredient['hints'])
-        # print('*********************************************************************************************')
-        # print(ingredient['measures'])
 
         return render_template('all_ingredients.html', ingredients=ingredient, recipe_id=recipe_id)
 
@@ -134,15 +134,19 @@ def add_recipe(user_cleanse_id):
         calories = request.form.get('calories')
         measurement = request.form.get('measurement')
         user = crud.get_user_by_email(session['email'])
+        photo = '/static/img/smoothie.jpg'
 
         recipe = crud.create_recipe(recipe_name, user)
-        ingredient = crud.create_ingredient(ingredient_name, calories, measurement)
+        ingredient = crud.create_ingredient(ingredient_name, calories, measurement, photo)
 
         crud.create_recipe_ingredient(recipe, ingredient)
         crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
 
         return redirect('/user_cleanses') 
     else:
+        if 'user_id' not in session:
+            return redirect('/login')
+
         return render_template('add_recipe.html')
 
 
@@ -161,15 +165,19 @@ def add_recipe_empty(user_cleanse_id):
         calories = request.form.get('calories')
         measurement = request.form.get('measurement')
         user = crud.get_user_by_email(session['email'])
+        photo = "/static/img/smoothie.jpg"
 
         recipe = crud.create_recipe(recipe_name, user)
-        ingredient = crud.create_ingredient(ingredient_name, calories, measurement)
+        ingredient = crud.create_ingredient(ingredient_name, calories, measurement, photo)
 
         crud.create_recipe_ingredient(recipe, ingredient)
         crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
 
         return redirect('/user_cleanses')
     else:
+        if 'user_id' not in session:
+            return redirect('/login')
+
         return render_template('add_recipe.html')
 
 
@@ -177,6 +185,9 @@ def add_recipe_empty(user_cleanse_id):
 @app.route('/user_cleanses')
 def user_cleanses():
     """Shows all cleanses for a specific user"""
+
+    if 'user_id' not in session:
+            return redirect('/login')
 
     user_id = session['user_id']
     user_cleanses = crud.get_user_cleanses(user_id)
@@ -205,6 +216,9 @@ def user_cleanse_recipes(user_cleanse_id):
 
         return redirect(f'/cleanse/{user_cleanse_id}')
     else:
+
+        if 'user_id' not in session:
+            return redirect('/login')
 
         user_cleanse = crud.get_user_cleanse(user_cleanse_id)
         user_cleanse_recipes = crud.get_user_cleanse_recipes(user_cleanse_id)
@@ -239,6 +253,9 @@ def start_cleanse():
         return redirect('/user_cleanses')
 
     else:
+        if 'user_id' not in session:
+            return redirect('/login')
+
         return render_template('start_cleanse.html')
 
 
@@ -294,8 +311,8 @@ def login():
             return redirect('/login')
 
     else: 
-        if 'user' in session:
-            return redirect(url_for('user'))
+        if 'user_id' in session:
+            return redirect('/user')
 
         return render_template('login.html')
 
@@ -319,26 +336,28 @@ def logout():
     # print(dir(session))
     flash('Successfully logged out')
 
-    return redirect('/')
+    return redirect('/login')
 
 
 @app.route('/community', methods=['GET', 'POST'])
 def community():
     """Community Page that allows users to post a global comment or picture"""
-
-    date = datetime.now()
     
     if request.method == 'POST':
         user = crud.get_user_by_id(session['user_id'])
         global_comment = request.form.get('comment')
-        comment = crud.create_global_comment(global_comment, user)
+        timestamp = datetime.now()
+        comment = crud.create_global_comment(global_comment, timestamp, user)
         flash("Comment Posted!")
 
         return redirect('/community')
     else:
+        if 'user_id' not in session:
+            return redirect('/login')
+
         comments = crud.get_global_comments()
 
-        return render_template('community.html', comments=comments, date=date)
+        return render_template('community.html', comments=comments)
 
 
 

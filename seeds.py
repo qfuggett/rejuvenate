@@ -64,7 +64,8 @@ SEED = {
             }
         },
         'global_comments': {
-            'comment': 'How is everyone doing?!'
+            'comment': 'How is everyone doing?!',
+            'timestamp': datetime.now()
         }
     },
     'Danielle': {
@@ -115,6 +116,10 @@ SEED = {
                 'photo': "https://billsberryfarm.com/wp-content/uploads/2020/08/peach.png"
             }
         },
+        'global_comments': {
+            'comment': 'Awesome!',
+            'timestamp': datetime.now()
+        }
     },
     'NyJai': {
         'info': {
@@ -164,6 +169,10 @@ SEED = {
                 'photo': "https://www.dishbydish.net/wp-content/uploads/How-to-Make-Almond-Milk-Dairy-Free-Vegan_Final2-scaled.jpg"
             }
         },
+        'global_comments': {
+            'comment': 'I am enjoyoing my smoothies',
+            'timestamp': datetime.now()
+        }
     },
     'Linda': {
         'info': {
@@ -213,6 +222,10 @@ SEED = {
                 'photo': "https://media.istockphoto.com/photos/tomato-isolated-on-white-background-picture-id466175630?k=6&m=466175630&s=612x612&w=0&h=fu_mQBjGJZIliOWwCR0Vf2myRvKWyQDsymxEIi8tZ38="
             }
         },
+        'global_comments': {
+            'comment': 'Just getting started with everything...',
+            'timestamp': datetime.now()
+        }
     },
     'Marcie': {
         'info': {
@@ -262,6 +275,10 @@ SEED = {
                 'photo': "https://www.dishbydish.net/wp-content/uploads/How-to-Make-Almond-Milk-Dairy-Free-Vegan_Final2-scaled.jpg"
             }
         },
+        'global_comments': {
+            'comment': 'Wonderful!',
+            'timestamp': datetime.now()
+        }
     }
 }
 
@@ -305,6 +322,7 @@ for i in SEED:
 
     global_comment_dict = SEED[i].get('global_comments', {'comment': 'test'})
     global_comment = global_comment_dict['comment']
+    comment_timestamp = global_comment_dict['timestamp']
 
 
     db_user = crud.create_user(username, email, password, name, location, about, member_since)
@@ -322,5 +340,5 @@ for i in SEED:
     crud.create_user_cleanse_recipe(timestamp, start_date, db_user_cleanse, db_recipe)
     crud.create_cleanse_log(clog_timestamp, comment, private, db_user_cleanse)
 
-    db_comment = crud.create_global_comment(global_comment, db_user)
+    db_comment = crud.create_global_comment(global_comment, timestamp, db_user)
 

@@ -154,11 +154,12 @@ class GlobalComment(db.Model):
     global_comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     global_comment = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime)
 
     user = db.relationship('User', backref='global_comments')
 
     def __repr__(self):
-        return f'<GlobalComment global_comment_id={self.global_comment_id} user_id={self.user_id} global_comment={self.global_comment}>'
+        return f'<GlobalComment global_comment_id={self.global_comment_id} user_id={self.user_id} global_comment={self.global_comment} timestamp={self.timestamp}>'
 
 
 

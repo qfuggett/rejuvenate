@@ -2,18 +2,19 @@
 {% block title %}{{ session['username'] }}'s Cleanses{% endblock %}
 
 {% block body %}
-  <h1>My Cleanses</h1>
-
   {% if user_cleanses|length == 0 %}
-    You don't have any cleanses! Let's <a href="/start_cleanse">create one!</a>
+  You don't have any cleanses! Let's <a href="/start_cleanse">create one!</a>
 
   {% endif %}
-
-  {% for user_cleanse in user_cleanses %}
-  <ul>
-    <li><a href="/cleanse/{{ user_cleanse.user_cleanse_id }}">{{ user_cleanse.cleanse.description }}</a></li>
-  </ul>
-  {% endfor %}
-  </br>
-  <a href="/">Go Back</a>
+<div class="row">
+    <div class="col">
+      <h1>My Cleanses</h1>
+    
+      {% for user_cleanse in user_cleanses %}
+      <ul>
+        <li><a href="/cleanse/{{ user_cleanse.user_cleanse_id }}">{{ user_cleanse.cleanse.description }}</a></li>
+      </ul>
+      {% endfor %}
+    </div>
+</div>
 {% endblock %}

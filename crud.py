@@ -202,10 +202,10 @@ def get_cleanse_logs(user_cleanse_id):
 
 
 
-def create_global_comment(global_comment, user):
+def create_global_comment(global_comment, timestamp, user):
     """Creates a comment"""
 
-    global_comment = GlobalComment(global_comment=global_comment, user=user)
+    global_comment = GlobalComment(global_comment=global_comment, timestamp=timestamp, user=user)
 
     db.session.add(global_comment)
     db.session.commit()

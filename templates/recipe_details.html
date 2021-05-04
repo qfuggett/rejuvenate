@@ -4,26 +4,29 @@
 {% block body %}
 <h2>Ingredients in {{ recipe.name }}:</h2>
 {% for recipe_ingredient in recipe_ingredients %}
-<div class="card" style="width: 18rem;"></div>
-  <img class="card-img-top" style="width: 18em;" src={{ recipe_ingredient.ingredient.photo }} alt={{ recipe_ingredient.ingredient.name }}>
-  <div class="card-body">
-    <h5 class="card-title">{{ recipe_ingredient.ingredient.name }}</h5>
-      <p class="card-text">Calories: {{ recipe_ingredient.ingredient.calories }},
-      Measurement: {{ recipe_ingredient.ingredient.measurement }}</p>
+<div class="row">
+  <div class="col">
+    <div class="card" style="width: 18rem;"></div>
+      <img class="card-img-top" style="width: 18em;" src={{ recipe_ingredient.ingredient.photo }} alt={{ recipe_ingredient.ingredient.name }}>
+      <div class="card-body">
+        <h5 class="card-title">{{ recipe_ingredient.ingredient.name }}</h5>
+          <p class="card-text">Calories: {{ recipe_ingredient.ingredient.calories }},
+          Measurement: {{ recipe_ingredient.ingredient.measurement }}</p>
+      </div>
+    </div>
   </div>
 </div>
 {% endfor %}
 </br>
 
-<p>
-  <h3>Add an ingredient:</h3>
-  <form class="form-inline" action="/recipe/{{ recipe.recipe_id }}/add-ingredient">
-    Ingredient: <input class="form-control mr-sm-2" type="text" name="name">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</p>
-<a href="/recipe/{{ recipe.recipe_id }}"">Go Back</a>
-
-
+  <div class="row">
+    <div class="col">
+      <h3>Add an ingredient:</h3>
+      <form class="form-inline" action="/recipe/{{ recipe.recipe_id }}/add-ingredient">
+        Ingredient: <input class="form-control mr-sm-2" type="text" name="name">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
 
 {% endblock %}
