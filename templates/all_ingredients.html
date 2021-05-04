@@ -2,11 +2,11 @@
 {% block title %}Fetching From Food Database . . . .{% endblock %}
 
 {% block body %}
-  {% for ingredient in ingredients %}
-      <div class="row">
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for ingredient in ingredients %}
         <div class="col">
           <form method='POST' action="/recipe/{{ recipe_id }}/add-ingredient">
-            <div class="card" style="width: 18rem;"></div>
+            <div class="card" style="width: 18rem;">
               <img class="card-img-top" style="width: 18em;" src="{{ ingredient['food']['image']}}" alt={{ ingredient['food']['label'] }}>
               <div class="card-body">
                 <h5 class="card-title" id="ingredient-item"><b>{{ ingredient['food']['label'] }}</h5>
@@ -26,6 +26,6 @@
             </div>
           </form>
         </div>
+        {% endfor %}
       </div>
-  {% endfor %}
 {% endblock %}

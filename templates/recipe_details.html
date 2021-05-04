@@ -3,21 +3,21 @@
 
 {% block body %}
 <h2>Ingredients in {{ recipe.name }}:</h2>
-{% for recipe_ingredient in recipe_ingredients %}
-<div class="row">
-  <div class="col">
-    <div class="card" style="width: 18rem;"></div>
-      <img class="card-img-top" style="width: 18em;" src={{ recipe_ingredient.ingredient.photo }} alt={{ recipe_ingredient.ingredient.name }}>
-      <div class="card-body">
-        <h5 class="card-title">{{ recipe_ingredient.ingredient.name }}</h5>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  {% for recipe_ingredient in recipe_ingredients %}
+    <div class="col">
+      <div class="card" style="width: 18em;">
+        <img class="card-img-top" style="width: 18em;" src={{ recipe_ingredient.ingredient.photo }} alt={{ recipe_ingredient.ingredient.name }}>
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe_ingredient.ingredient.name }}</h5>
           <p class="card-text">Calories: {{ recipe_ingredient.ingredient.calories }},
-          Measurement: {{ recipe_ingredient.ingredient.measurement }}</p>
+            Measurement: {{ recipe_ingredient.ingredient.measurement }}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
+  {% endfor %}
 </div>
-{% endfor %}
-</br>
 
   <div class="row">
     <div class="col">
