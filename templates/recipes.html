@@ -2,28 +2,15 @@
 {% block title %}All Smoothies{% endblock %}
 
 {% block body %}
-  <div class="row">
-    <div class="col">
-      <h1>All Smoothies in Database!</h1>
-    
-      <ol>
-        {% for recipe in recipes %}
-        <p>
-          <li>{{ recipe.name }}</li>
-          <select name="measurement" id="measurement">
-            <option value="">Ingredients</option>
-          {% for ingredient in ingredients %}
-            {% for recipe_ingredient in recipe_ingredients %}
-            {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
-              <option value="name">{{ ingredient.name }} </option>
-            {% endif %}
-            {% endfor %}
-          {% endfor %}
-          </select>
-        </p>
-        {% endfor %}
-      </ol>
-    </div>
-  </div>
+{% for recipe in recipes %}
+    {{ recipe.name }}
+    {% for ingredient in ingredients %}
+                    {% for recipe_ingredient in recipe_ingredients %}
+                      {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
+                        <li class="list-group-item">{{ ingredient.name }}</li>
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+{% endfor %}
 
 {% endblock %}

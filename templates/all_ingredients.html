@@ -2,29 +2,36 @@
 {% block title %}Fetching From Food Database . . . .{% endblock %}
 
 {% block body %}
-      <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="row">
+          <div class="col">
+            {% if ingredients|length == 0 %}
+              No Search Results rendered. <a href="/recipe/{{ recipe_id }}">Please try again.</a> 
+            {% endif %}
+          </div>
         {% for ingredient in ingredients %}
-        <div class="col">
-          <form method='POST' action="/recipe/{{ recipe_id }}/add-ingredient">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" style="width: 18em;" src="{{ ingredient['food']['image']}}" alt={{ ingredient['food']['label'] }}>
-              <div class="card-body">
-                <h5 class="card-title" id="ingredient-item"><b>{{ ingredient['food']['label'] }}</h5>
-                <p class="card-text">{{ (ingredient['food']['nutrients']['ENERC_KCAL'])|int }} calories</p>
-                <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
-                <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
-                <input type="hidden" name="photo" value="{{ ingredient['food']['image'] }}"/>
-                <select name="measurement" id="measurement">
-                  <option>Measurement</option>
-                  <option value="whole">Whole Package</option>
-                  <option value="sliced">Sliced</option>
-                  <option value="cup">Cup</option>
-                  <option value="ounce">Ounce</option>
-                </select>
-                <button class="btn btn-primary" type="submit">Select Ingredient</button>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="well search-result">
+            <div class="row">
+              <div class="col-xs-6 col-sm-9 col-md-9 col-lg-10 title">
+                <form method='POST' action="/recipe/{{ recipe_id }}/add-ingredient">
+                    <img src="{{ ingredient['food']['image']}}" alt={{ ingredient['food']['label'] }}>
+                      <h5 id="ingredient-item"><b>{{ ingredient['food']['label'] }}</h5>
+                      <p>{{ (ingredient['food']['nutrients']['ENERC_KCAL'])|int }} calories</p>
+                      <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
+                      <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
+                      <input type="hidden" name="photo" value="{{ ingredient['food']['image'] }}"/>
+                      <select name="measurement" id="measurement">
+                        <option>Measurement</option>
+                        <option value="whole">Whole Package</option>
+                        <option value="sliced">Sliced</option>
+                        <option value="cup">Cup</option>
+                        <option value="ounce">Ounce</option>
+                      </select>
+                      <button class="btn btn-primary" type="submit">Select Ingredient</button>
+                </form>
               </div>
             </div>
-          </form>
+          </div>
         </div>
         {% endfor %}
       </div>
