@@ -5,14 +5,16 @@
   {% if 'user_id' in session %}
     <div class="row">
       <div class="col-2">
-        <p class="statement">Take care of your insides</p>
+        <img id="smoothie-hp" src="/static/img/smoothie.png" alt="">
       </div>
     </div>
   {% else %}
     <div class="row">
       <div class="col">
-        <img style="width: 30em;" src="/static/img/alex-loup--ZvC04d-xLw-unsplash.jpg">
+        <img id="smoothie-hp" src="/static/img/smoothie.png">
       </div>
+    </div>
+    <div class="row">
       <div class="col">
         <h3>Search over 900,000 food items:</h3>
         <form action="/search" class="form-inline">
