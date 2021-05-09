@@ -115,7 +115,7 @@ def search():
     ingredient = data['hints']
 
 
-    return render_template('all_ingredients.html', ingredients=ingredient, recipe_id=recipe_id)
+    return render_template('public_all_ingredients.html', ingredients=ingredient)
 
 
 
