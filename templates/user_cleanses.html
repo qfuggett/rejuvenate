@@ -4,7 +4,7 @@
 {% block body %}
 <div class="row">
     <div class="col">
-      <h1>Here Are Your Cleanses:</h1>
+      <h1>Your Cleanses</h1>
 
       {% if user_cleanses|length == 0 %}
         You don't have any cleanses yet! </br> 
@@ -12,9 +12,11 @@
       {% endif %}
     
       {% for user_cleanse in user_cleanses %}
-      <ul>
-        <a href="/cleanse/{{ user_cleanse.user_cleanse_id }}">{{ user_cleanse.cleanse.description }}</a>
-      </ul>
+      <p>
+        <ul>
+          <a href="/cleanse/{{ user_cleanse.user_cleanse_id }}">{{ user_cleanse.cleanse.description }}</a>
+        </ul>
+      </p>
       {% endfor %}
     </div>
     <div class="col">
@@ -40,6 +42,11 @@
             <input type="submit" value="Start!">
           </p>
         </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <img class="img-fluid" src="/static/img/fruitmedley.png" height=100% width=100%>
   </div>
 </div>
 {% endblock %}

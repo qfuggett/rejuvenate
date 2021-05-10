@@ -4,7 +4,8 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-8">
+        <h2 style="font: Lato; text-align: center;">Let's Talk!</h2>
+        <div class="col-md-5">
             {% for comment in comments %}
             <div class="media g-mb-30 media-comment">
                 <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="/static/img/smoothie.jpg" width=10% height=10% alt="Image Description">
@@ -19,12 +20,14 @@
             <div class="bg-light p-2">
                 <form action="/community" method="POST">
                     <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="/static/img/smoothie.jpg" width=10% height=10%>
-                        <textarea id="comment" name="comment" class="form-control ml-1 shadow-none textarea"></textarea></div>
+                        <textarea id="comment" name="comment" class="form-control ml-1 shadow-none textarea"></textarea>
+                    </div>
                     <div class="mt-2 text-right">
                         <input type="submit" class="btn btn-primary btn-sm shadow-none" value="Post Comment">
                     </div>
                 </form>
             </div>
         </div>
+    </div>
 
 {% endblock %}

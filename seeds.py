@@ -18,11 +18,11 @@ SEED = {
     'Tesa': {
         'info': {
             'username': 'Tesa',
-            'email': 'tesa@test.com',
-            'password': 'test',
+            'email': 'qfuggett@gmail.com',
+            'password': 'Hammas012',
             'name': 'Tessy',
             'location': 'Detroit, MI',
-            'about': 'ready to get started! wooooo',
+            'about': 'All you need to know is that I am excited!',
             'member_since': datetime.now()
         },
         'cleanse': {
@@ -35,7 +35,7 @@ SEED = {
         },
         'cleanse_log': {
             'timestamp': datetime.now(),
-            'comment': 'it hass only been an hour and i am ready to eat',
+            'comment': 'I am so excited for smoothies!',
             'private': True
 
         },
@@ -75,7 +75,7 @@ SEED = {
             'password': 'test',
             'name': 'Danielle',
             'location': 'Canton, MI',
-            'about': 'joined because my daughter suggested :)',
+            'about': 'Joined because my daughter suggested :)',
             'member_since': datetime.now()
         },
         'cleanse': {
@@ -88,7 +88,7 @@ SEED = {
         },
         'cleanse_log': {
             'timestamp': datetime.now(),
-            'comment': 'im not sure if i can make it',
+            'comment': "Let's do this!",
             'private': True
 
         },
@@ -117,7 +117,7 @@ SEED = {
             }
         },
         'global_comments': {
-            'comment': 'Awesome!',
+            'comment': 'I am too!',
             'timestamp': datetime.now()
         }
     },
@@ -128,7 +128,7 @@ SEED = {
             'password': 'test',
             'name': 'YayyYayy',
             'location': 'Southfield, MI',
-            'about': 'here we goooo',
+            'about': 'Needed a tracker for my accountability',
             'member_since': datetime.now()
         },
         'cleanse': {
@@ -170,7 +170,7 @@ SEED = {
             }
         },
         'global_comments': {
-            'comment': 'I am enjoyoing my smoothies',
+            'comment': 'I am enjoying my smoothies..are you?',
             'timestamp': datetime.now()
         }
     },
@@ -223,7 +223,7 @@ SEED = {
             }
         },
         'global_comments': {
-            'comment': 'Just getting started with everything...',
+            'comment': 'Today is my first day',
             'timestamp': datetime.now()
         }
     },
@@ -232,9 +232,9 @@ SEED = {
             'username': 'marcie',
             'email': 'marcie@test.com',
             'password': 'test',
-            'name': 'new to this',
+            'name': 'Marcie',
             'location': 'Charlotte, NC',
-            'about': 'new to this...but excited',
+            'about': 'New to this...but excited',
             'member_since': datetime.now()
         },
         'cleanse': {
@@ -276,7 +276,7 @@ SEED = {
             }
         },
         'global_comments': {
-            'comment': 'Wonderful!',
+            'comment': "I think I'm going to quit...",
             'timestamp': datetime.now()
         }
     }

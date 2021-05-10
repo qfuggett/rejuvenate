@@ -8,6 +8,7 @@
               No Search Results rendered. <a href="/">Please try again.</a> 
             {% endif %}
           </div>
+        <h2>Search Results</h2>
         {% for ingredient in ingredients %}
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="well search-result">
@@ -17,16 +18,6 @@
                     <img src="{{ ingredient['food']['image']}}" alt={{ ingredient['food']['label'] }}>
                       <h5 id="ingredient-item"><b>{{ ingredient['food']['label'] }}</h5>
                       <p>{{ (ingredient['food']['nutrients']['ENERC_KCAL'])|int }} calories</p>
-                      <input type="radio" name="name" value={{ ingredient['food']['label'] }}/>
-                      <input type="hidden" name="calories" value={{ ingredient['food']['nutrients']['ENERC_KCAL'] }}/>
-                      <input type="hidden" name="photo" value="{{ ingredient['food']['image'] }}"/>
-                      <select name="measurement" id="measurement">
-                        <option>Measurement</option>
-                        <option value="whole">Whole Package</option>
-                        <option value="sliced">Sliced</option>
-                        <option value="cup">Cup</option>
-                        <option value="ounce">Ounce</option>
-                      </select>
                 </form>
               </div>
             </div>

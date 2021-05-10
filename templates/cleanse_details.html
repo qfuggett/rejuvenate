@@ -6,45 +6,38 @@
     {% if user_cleanse_recipes|length == 0 %}
         <div class="row">
             <div class="col">
-                <h2>You have no smoothies inside this cleanse...Add one!</h2></br>
-                    <ul>
-                        {% if user_cleanse.active == True %}
-                        <li>Current Cleanse? Yes</li>
-                        {% else %}
-                        <li>Current Cleanse? No</li>
-                        {% endif %}
-                    </ul>
+                <h2>This cleanse has no smoothies.</h2></br>
                     <h2>Add A Smoothie</h2>
-            <form action="/add_recipe/{{ session['user_cleanse_id'] }}" method="POST">
-                <p>
-                    Smoothie Name <input type="text" name="recipe_name">
-                </p>
-        
-                <p>
-                    Ingredient 1 <input type="text" name="ingredient_name">
-                </p>
-        
-                <p>
-                    Calories <input type="number" name="calories">
-                </p>
-        
-                <p>
-                    Measurement
-                    <select name="measurement" id="measurement">
-                        <option value=""></option>
-                        <option value="whole">Whole Package</option>
-                        <option value="sliced">Sliced</option>
-                        <option value="cup">Cup</option>
-                        <option value="ounce">Ounce</option>
-                      </select>
-                </p>
-        
-                <p>
-                    <b><em>Add more ingredients later!</em></b>
-                </p>
-                    <input type="submit" id="form-submit" name="form-submit" value="Add!">
-                </p>
-              </form>
+                <form action="/add_recipe/{{ session['user_cleanse_id'] }}" method="POST">
+                    <p>
+                        Smoothie Name <input type="text" name="recipe_name">
+                    </p>
+            
+                    <p>
+                        Ingredient 1 <input type="text" name="ingredient_name">
+                    </p>
+            
+                    <p>
+                        Calories <input type="number" name="calories">
+                    </p>
+            
+                    <p>
+                        Measurement
+                        <select name="measurement" id="measurement">
+                            <option value=""></option>
+                            <option value="whole">Whole Package</option>
+                            <option value="sliced">Sliced</option>
+                            <option value="cup">Cup</option>
+                            <option value="ounce">Ounce</option>
+                        </select>
+                    </p>
+            
+                    <p>
+                        <b><em>Add more ingredients later!</em></b>
+                    </p>
+                        <input type="submit" id="form-submit" name="form-submit" value="Add!">
+                    </p>
+                </form>
             </div>
         </div>
     {% endif %}
@@ -52,7 +45,8 @@
     {% if user_cleanse_recipes|length >= 1 %}
     <div class="row">
         <div class="col">
-            <h2>Dates: {{ user_cleanse.cleanse.start_date.strftime("%A %d %B %Y") }} - {{ user_cleanse.cleanse.end_date.strftime("%A %d %B %Y") }}</h2>
+            <h2 style="text-align: center;">Cleanse Dates:</h2>
+            <h4 style="text-align: center;">{{ user_cleanse.cleanse.start_date.strftime("%A %d %B %Y") }} - {{ user_cleanse.cleanse.end_date.strftime("%A %d %B %Y") }}</h4>
         </div>
     </div>
         <div class="row">
