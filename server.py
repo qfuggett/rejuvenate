@@ -142,7 +142,7 @@ def add_recipe(user_cleanse_id):
         crud.create_recipe_ingredient(recipe, ingredient)
         crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
 
-        return redirect('/user_cleanses') 
+        return redirect(f'/cleanse/{user_cleanse_id}') 
     else:
         if 'user_id' not in session:
             return redirect('/login')
@@ -152,7 +152,7 @@ def add_recipe(user_cleanse_id):
 
 @app.route('/add_recipe_empty/<user_cleanse_id>', methods=['GET', 'POST'])
 def add_recipe_empty(user_cleanse_id):
-    """Add a smoothie/recipe to a cleanse that does not have any recipes"""
+    """Add a smoothie/recipe to a cleanse that does not have any smoothies/recipes"""
 
     if request.method == 'POST':
 
@@ -173,7 +173,7 @@ def add_recipe_empty(user_cleanse_id):
         crud.create_recipe_ingredient(recipe, ingredient)
         crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
 
-        return redirect('/user_cleanses')
+        return redirect(f'/cleanse/{user_cleanse_id}')
     else:
         if 'user_id' not in session:
             return redirect('/login')
@@ -182,17 +182,36 @@ def add_recipe_empty(user_cleanse_id):
 
 
 
-@app.route('/user_cleanses')
+@app.route('/user_cleanses', methods=['GET', 'POST'])
 def user_cleanses():
     """Shows all cleanses for a specific user"""
 
-    if 'user_id' not in session:
-            return redirect('/login')
+    user = crud.get_user_by_email(session['email'])
 
-    user_id = session['user_id']
-    user_cleanses = crud.get_user_cleanses(user_id)
+    if request.method == 'POST':
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        public = request.form.get('public')
+        description = request.form.get('description')
 
-    return render_template('user_cleanses.html', user_cleanses=user_cleanses)
+        if public == 'on':
+            public = True
+        else:
+            public = False
+
+        cleanse = crud.create_cleanse(start_date, end_date, public, description, user)
+        crud.create_user_cleanse(True, False, cleanse, user)
+
+        return redirect('/user_cleanses')
+    else:
+
+        if 'user_id' not in session:
+                return redirect('/login')
+
+        user_id = session['user_id']
+        user_cleanses = crud.get_user_cleanses(user_id)
+
+        return render_template('user_cleanses.html', user_cleanses=user_cleanses)
 
 
 @app.route('/cleanse/<user_cleanse_id>', methods=['GET', 'POST'])
@@ -201,20 +220,40 @@ def user_cleanse_recipes(user_cleanse_id):
         Users can also submit an entry to their cleanse log for a specific cleanse"""
 
     if request.method == 'POST':
+        if "form-submit" in request.form:
+            timestamp = datetime.now()
+            date = datetime.now()
+            user_cleanse = crud.get_user_cleanse(user_cleanse_id)
 
-        timestamp = datetime.now()
-        comment = request.form.get('comment')
-        private = request.form.get('private')
+            recipe_name = request.form.get('recipe_name')
+            ingredient_name = request.form.get('ingredient_name')
+            calories = request.form.get('calories')
+            measurement = request.form.get('measurement')
+            user = crud.get_user_by_email(session['email'])
+            photo = "/static/img/smoothie.jpg"
 
-        if private == 'on':
-            private = False
-        else:
-            private = True
+            recipe = crud.create_recipe(recipe_name, user)
+            ingredient = crud.create_ingredient(ingredient_name, calories, measurement, photo)
 
-        user_cleanse = crud.get_user_cleanse(user_cleanse_id)
-        crud.create_cleanse_log(timestamp, comment, private, user_cleanse)
+            crud.create_recipe_ingredient(recipe, ingredient)
+            crud.create_user_cleanse_recipe(timestamp, date, user_cleanse, recipe)
 
-        return redirect(f'/cleanse/{user_cleanse_id}')
+            return redirect(f'/cleanse/{user_cleanse_id}')
+
+        if "form2-submit" in request.form:
+            timestamp = datetime.now()
+            comment = request.form.get('comment')
+            private = request.form.get('private')
+
+            if private == 'on':
+                private = False
+            else:
+                private = True
+
+            user_cleanse = crud.get_user_cleanse(user_cleanse_id)
+            crud.create_cleanse_log(timestamp, comment, private, user_cleanse)
+
+            return redirect(f'/cleanse/{user_cleanse_id}')
     else:
 
         if 'user_id' not in session:

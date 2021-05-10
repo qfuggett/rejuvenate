@@ -8,14 +8,38 @@
 
       {% if user_cleanses|length == 0 %}
         You don't have any cleanses yet! </br> 
-        Let's <a href="/start_cleanse">create one!</a>
+        Create one!
       {% endif %}
     
       {% for user_cleanse in user_cleanses %}
       <ul>
-        <li><a href="/cleanse/{{ user_cleanse.user_cleanse_id }}">{{ user_cleanse.cleanse.description }}</a></li>
+        <a href="/cleanse/{{ user_cleanse.user_cleanse_id }}">{{ user_cleanse.cleanse.description }}</a>
       </ul>
       {% endfor %}
     </div>
+    <div class="col">
+      <h2>Start A New Cleanse</h2>
+      <form action="/start_cleanse" method="POST">
+          <p>
+              Start Date <input type="date" name="start_date">
+          </p>
+          
+          <p>
+              End Date <input type="date" name="end_date">
+          </p>
+      
+          <p>
+              Viewable by the public? <input type="checkbox" name="public" checked>
+          </p>
+  
+          <p>
+              Description: <input type="text" name="description">
+          </p>
+      
+          <p>
+            <input type="submit" value="Start!">
+          </p>
+        </form>
+  </div>
 </div>
 {% endblock %}

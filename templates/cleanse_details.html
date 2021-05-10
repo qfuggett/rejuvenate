@@ -13,8 +13,38 @@
                         {% else %}
                         <li>Current Cleanse? No</li>
                         {% endif %}
-                        <li><a href="/add_recipe_empty/{{ user_cleanse.user_cleanse_id }}">Add a Smoothie</a></li>
                     </ul>
+                    <h2>Add A Smoothie</h2>
+            <form action="/add_recipe/{{ session['user_cleanse_id'] }}" method="POST">
+                <p>
+                    Smoothie Name <input type="text" name="recipe_name">
+                </p>
+        
+                <p>
+                    Ingredient 1 <input type="text" name="ingredient_name">
+                </p>
+        
+                <p>
+                    Calories <input type="number" name="calories">
+                </p>
+        
+                <p>
+                    Measurement
+                    <select name="measurement" id="measurement">
+                        <option value=""></option>
+                        <option value="whole">Whole Package</option>
+                        <option value="sliced">Sliced</option>
+                        <option value="cup">Cup</option>
+                        <option value="ounce">Ounce</option>
+                      </select>
+                </p>
+        
+                <p>
+                    <b><em>Add more ingredients later!</em></b>
+                </p>
+                    <input type="submit" id="form-submit" name="form-submit" value="Add!">
+                </p>
+              </form>
             </div>
         </div>
     {% endif %}
@@ -48,7 +78,7 @@
                         <textarea name="comment" rows="4" cols="30"></textarea>
                         </br>
                         Private? <input type="checkbox" name="private" checked>
-                        <input type="submit" value="Complete Log">
+                        <input type="submit" id="form2-submit" name="form2-submit" value="Complete Log">
                     </form>
             </div>
             <div class="col">
@@ -56,7 +86,7 @@
                     <h2>My Logs Throughout The Day....</h2>
                     {% for log in cleanse_logs %}
                         <ul>
-                            <li>{{ log.comment }}</li>
+                            <li>{{log.timestamp.strftime("%A %d %B %Y") }}: {{ log.comment }}</li>
                         </ul>
                     {% endfor %}
                 {% endif %}

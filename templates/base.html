@@ -41,7 +41,6 @@
               <ul class="navbar-nav">
                 {% if session.get('username') %}
                   <li class="nav-item"><a class="nav-link" href="/profile">MY PROFILE</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/start_cleanse">START A CLEANSE</a></li>
                   <li class="nav-item"><a class="nav-link" href="/user_cleanses">MY CLEANSES</a></li>
                   <li class="nav-item"><a class="nav-link" href="/recipes">FOOD DATABASE</a></li>
                   <li class="nav-item"><a class="nav-link" href="/community">COMMUNITY</a></li>
@@ -49,7 +48,7 @@
                 {% else %}
                   <li class="nav-item"><a class="nav-link" href="/login">LOGIN</a></li>
                   <li class="nav-item"><a class="nav-link" href="/signup">SIGN UP</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/recipes">FOOD</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/recipes">FOOD DATABASE</a></li>
                 {% endif %}
               </ul>
           </nav>
