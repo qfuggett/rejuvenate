@@ -4,15 +4,21 @@
 {% block body %}
 <div class="row">
     <div class="col">
-      <h1>Here are your details:</h1>
-    
-      <ul>
-        <li>session user id is {{ session['user_id'] }}</li>
-        <li>Name: {{ user.name }}</li>
-        <li>Location: {{ user.location }}</li>
-        <li>About: {{ user.about }}</li>
-        <li>Date Joined: {{ user.member_since.strftime("%A %d %B %Y") }}</li>
-      </ul>
-    </div>
+      <div class="text-center">
+        <h3>
+          {{ user.name }}<span class="font-weight-light">, 27</span>
+        </h3>
+        <div class="h5 font-weight-300">
+          <i class="ni location_pin mr-2"></i>{{ user.location }}
+        </div>
+        <div class="h5 mt-4">
+          <i class="ni business_briefcase-24 mr-2"></i>Member Since:
+        </div>
+        <div>
+          <i class="ni education_hat mr-2"></i>{{ user.member_since.strftime("%A %d %B %Y") }}
+        </div>
+        <hr class="my-4">
+        <p>{{ user.about }}</p>
+      </div>
 </div>
 {% endblock %}
