@@ -2,15 +2,33 @@
 {% block title %}All Smoothies{% endblock %}
 
 {% block body %}
-{% for recipe in recipes %}
-    {{ recipe.name }}
-    {% for ingredient in ingredients %}
-                    {% for recipe_ingredient in recipe_ingredients %}
-                      {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
-                        <li class="list-group-item">{{ ingredient.name }}</li>
-                      {% endif %}
-                    {% endfor %}
-                  {% endfor %}
-{% endfor %}
+<div class="row">
+  <div class="col">
+    <p><h3 style="text-align: center;">Check out the smoothies in Rejuvenate...</h3></p>
+    <div class="card-group">
+      {% for recipe in recipes %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }} smoothie</h5>
+            {% for ingredient in ingredients %}
+               {% for recipe_ingredient in recipe_ingredients %}
+                  {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
+                    <p class="card-text">
+                      {{ ingredient.name }}
+                    </p>
+                   {% endif %}
+                {% endfor %}
+              {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <img class="img-fluid" src="/static/img/fruitsvegs.png" height=100% width=100%>
+  </div>
+</div>
 
 {% endblock %}
