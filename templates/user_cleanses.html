@@ -2,13 +2,14 @@
 {% block title %}{{ session['username'] }}'s Cleanses{% endblock %}
 
 {% block body %}
-  {% if user_cleanses|length == 0 %}
-  You don't have any cleanses! Let's <a href="/start_cleanse">create one!</a>
-
-  {% endif %}
 <div class="row">
     <div class="col">
       <h1>My Cleanses</h1>
+
+      {% if user_cleanses|length == 0 %}
+        You don't have any cleanses yet! </br> 
+        Let's <a href="/start_cleanse">create one!</a>
+      {% endif %}
     
       {% for user_cleanse in user_cleanses %}
       <ul>

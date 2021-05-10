@@ -249,7 +249,6 @@ def start_cleanse():
         cleanse = crud.create_cleanse(start_date, end_date, public, description, user)
         crud.create_user_cleanse(True, False, cleanse, user)
 
-
         return redirect('/user_cleanses')
 
     else:
@@ -275,10 +274,7 @@ def sign_up():
         about = request.form.get('about')
         member_since = datetime.now()
 
-        if username or email or password == "":
-            flash('Please complete all fields')
-
-            return redirect('/signup')
+        
 
         crud.create_user(username, email, password, name, location, about, member_since)
         flash('Account created! Please log in.')

@@ -38,16 +38,6 @@
                 {% endfor %}
                 </ul>
             </div>
-            <div class="col offset-3">
-                {% if cleanse_logs %}
-                    <h2>My Logs Throughout The Day....</h2>
-                    {% for log in cleanse_logs %}
-                        <ul>
-                            <li>{{ log.comment }}</li>
-                        </ul>
-                    {% endfor %}
-                {% endif %}
-            </div>
         </div>
     {% endif %}
         
@@ -60,6 +50,16 @@
                         Private? <input type="checkbox" name="private" checked>
                         <input type="submit" value="Complete Log">
                     </form>
+            </div>
+            <div class="col">
+                {% if cleanse_logs %}
+                    <h2>My Logs Throughout The Day....</h2>
+                    {% for log in cleanse_logs %}
+                        <ul>
+                            <li>{{ log.comment }}</li>
+                        </ul>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     
