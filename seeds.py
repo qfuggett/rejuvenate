@@ -1,8 +1,7 @@
 """Script to seed database."""
 
 import os
-from datetime import datetime
-
+import datetime
 import crud
 import model
 import server
@@ -24,25 +23,25 @@ SEED = {
             'name': 'Tessy',
             'location': 'Detroit, MI',
             'about': 'All you need to know is that I am excited!',
-            'member_since': datetime.now()
+            'member_since': datetime.date(2021, 2, 21)
         },
         'cleanse': {
-            'description': 'my first cleanse!',
-            'start_date': datetime.now(),
-            'end_date': datetime.now(),
+            'description': 'My first cleanse!',
+            'start_date': datetime.date(2021, 2, 21),
+            'end_date': datetime.date(2021, 2, 24),
             'public': False,
             'active': True,
             'completed': False
         },
         'cleanse_log': {
-            'timestamp': datetime.now(),
+            'timestamp': datetime.date(2021, 2, 21),
             'comment': 'I am so excited for smoothies!',
             'private': True
 
         },
         'recipe': {
-            'name': 'sunshine',
-            'timestamp': datetime.now()
+            'name': 'Sunshine',
+            'timestamp': datetime.date(2021, 2, 21)
         },
         'ingredients': {
             1: {
@@ -66,36 +65,36 @@ SEED = {
         },
         'global_comments': {
             'comment': 'How is everyone doing?!',
-            'timestamp': datetime.now()
+            'timestamp': datetime.date(2021, 2, 21)
         }
     },
     'Danielle': {
         'info': {
             'username': 'dhooper',
             'email': 'danielle@test.com',
-            'password': 'test',
+            'password': 'hooper',
             'name': 'Danielle',
             'location': 'Canton, MI',
             'about': 'Joined because my daughter suggested :)',
-            'member_since': datetime.now()
+            'member_since': datetime.date(2021, 2, 21)
         },
         'cleanse': {
-            'description': 'my first cleanse with the family!',
-            'start_date': datetime.now(),
-            'end_date': datetime.now(),
+            'description': 'My first cleanse with the family!',
+            'start_date': datetime.date(2021, 2, 22),
+            'end_date': datetime.date(2021, 2, 24),
             'public': False,
             'active': True,
             'completed': False
         },
         'cleanse_log': {
-            'timestamp': datetime.now(),
+            'timestamp': datetime.date(2021, 2, 22),
             'comment': "Let's do this!",
             'private': True
 
         },
         'recipe': {
-            'name': 'blue storm',
-            'timestamp': datetime.now()
+            'name': 'Blue Storm',
+            'timestamp': datetime.date(2021, 2, 22)
         },
         'ingredients': {
             1: {
@@ -119,36 +118,36 @@ SEED = {
         },
         'global_comments': {
             'comment': 'I am too!',
-            'timestamp': datetime.now()
+            'timestamp': datetime.date(2021, 2, 22)
         }
     },
     'NyJai': {
         'info': {
             'username': 'NyJai',
             'email': 'nyjai@test.com',
-            'password': 'test',
+            'password': 'existorlive',
             'name': 'YayyYayy',
             'location': 'Southfield, MI',
             'about': 'Needed a tracker for my accountability',
-            'member_since': datetime.now()
+            'member_since': datetime.date(2021, 3, 9)
         },
         'cleanse': {
-            'description': 'lets goooo',
-            'start_date': datetime.now(),
-            'end_date': datetime.now(),
+            'description': 'Lets goooo',
+            'start_date': datetime.date(2021, 3, 9),
+            'end_date': datetime.date(2021, 3, 12),
             'public': False,
             'active': True,
             'completed': False
         },
         'cleanse_log': {
-            'timestamp': datetime.now(),
-            'comment': 'im confident!',
+            'timestamp': datetime.date(2021, 3, 10),
+            'comment': 'Im confident!',
             'private': True
 
         },
         'recipe': {
-            'name': 'plain',
-            'timestamp': datetime.now()
+            'name': 'Sweet Apple',
+            'timestamp': datetime.date(2021, 3, 9)
         },
         'ingredients': {
             1: {
@@ -172,36 +171,36 @@ SEED = {
         },
         'global_comments': {
             'comment': 'I am enjoying my smoothies..are you?',
-            'timestamp': datetime.now()
+            'timestamp': datetime.date(2021, 3, 9)
         }
     },
     'Linda': {
         'info': {
             'username': 'absrlife',
             'email': 'linda@test.com',
-            'password': 'test',
-            'name': "Gma",
+            'password': 'flowers',
+            'name': "The Cool Gma",
             'location': 'Oak Park, MI',
             'about': 'Im an expert at this!',
-            'member_since': datetime.now()
+            'member_since': datetime.date(2021, 3, 24)
         },
         'cleanse': {
-            'description': 'first cleanse of the week!',
-            'start_date': datetime.now(),
-            'end_date': datetime.now(),
+            'description': 'First cleanse of the year!',
+            'start_date': datetime.date(2021, 3, 24),
+            'end_date': datetime.date(2021, 3, 26),
             'public': False,
             'active': True,
             'completed': False
         },
         'cleanse_log': {
-            'timestamp': datetime.now(),
-            'comment': 'im feeling great',
+            'timestamp': datetime.date(2021, 3, 24),
+            'comment': 'Im feeling great',
             'private': True
 
         },
         'recipe': {
-            'name': 'vampire',
-            'timestamp': datetime.now()
+            'name': 'Vampire',
+            'timestamp': datetime.date(2021, 3, 24)
         },
         'ingredients': {
             1: {
@@ -225,36 +224,36 @@ SEED = {
         },
         'global_comments': {
             'comment': 'Today is my first day',
-            'timestamp': datetime.now()
+            'timestamp': datetime.date(2021, 3, 24)
         }
     },
     'Marcie': {
         'info': {
             'username': 'marcie',
             'email': 'marcie@test.com',
-            'password': 'test',
+            'password': 'bella',
             'name': 'Marcie',
             'location': 'Charlotte, NC',
             'about': 'New to this...but excited',
-            'member_since': datetime.now()
+            'member_since': datetime.date(2021, 4, 1)
         },
         'cleanse': {
-            'description': 'first cleanse ever!',
-            'start_date': datetime.now(),
-            'end_date': datetime.now(),
+            'description': 'First cleanse ever!',
+            'start_date': datetime.date(2021, 4, 1),
+            'end_date': datetime.date(2021, 4, 3),
             'public': False,
             'active': True,
             'completed': False
         },
         'cleanse_log': {
-            'timestamp': datetime.now(),
-            'comment': 'we will see how this goes',
+            'timestamp': datetime.date(2021, 4, 1),
+            'comment': 'We will see how this goes',
             'private': True
 
         },
         'recipe': {
-            'name': 'veggie bomb',
-            'timestamp': datetime.now()
+            'name': 'Veggie bomb',
+            'timestamp': datetime.date(2021, 4, 1)
         },
         'ingredients': {
             1: {
@@ -278,7 +277,7 @@ SEED = {
         },
         'global_comments': {
             'comment': "I think I'm going to quit...",
-            'timestamp': datetime.now()
+            'timestamp': datetime.date(2021, 4, 1)
         }
     }
 }

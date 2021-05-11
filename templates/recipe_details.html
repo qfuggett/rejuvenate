@@ -18,15 +18,14 @@
     </div>
   {% endfor %}
 </div>
-
-  <div class="row">
-    <div class="col">
-      <h3>Add an ingredient:</h3>
-      <form class="form-inline" action="/recipe/{{ recipe.recipe_id }}/add-ingredient">
-        Ingredient: <input class="form-control mr-sm-2" type="text" name="name">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
+<div class="row">
+  <div class="col">
+    <h3>Add an ingredient:</h3>
+    <form class="form-inline" action="/recipe/{{ recipe.recipe_id }}/add-ingredient">
+      Ingredient: <input class="form-control mr-sm-2" type="text" name="name">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
+</div>
 
 {% endblock %}

@@ -9,7 +9,7 @@
       {% for recipe in recipes %}
         <div class="card" style="width: 18rem;">
           <div class="card-body">
-            <h5 class="card-title">{{ recipe.name }} smoothie</h5>
+            <h5 class="card-title">{{ recipe.name }}</h5>
             {% for ingredient in ingredients %}
                {% for recipe_ingredient in recipe_ingredients %}
                   {% if ((recipe_ingredient.recipe_id == recipe.recipe_id) and (recipe_ingredient.ingredient_id == ingredient.ingredient_id)) %}
