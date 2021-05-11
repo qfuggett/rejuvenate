@@ -8,7 +8,7 @@ import crud
 import requests 
 import json
 import os
-import re
+import bcrypt
 
 
 
@@ -313,11 +313,25 @@ def sign_up():
         about = request.form.get('about')
         member_since = datetime.now()
 
-        
+        salt = bcrypt.gensalt()
+        b = password.encode("utf-8")
+        hashed = bcrypt.hashpw(b, salt)
 
-        crud.create_user(username, email, password, name, location, about, member_since)
+        crud.create_user(username, email, hashed, name, location, about, member_since)
+
+        if not username:
+            flash('Missing username. Please complete all fields.')
+            return redirect('/signup')
+
+        if not email:
+            flash('Missing email address. Please complete all fields.')
+            return redirect('/signup')
+
+        if not password:
+            flash('Missing password. Please complete all fields.')
+            return redirect('/signup')
+
         flash('Account created! Please log in.')
-
         return redirect('/login')
     else:
 
@@ -331,16 +345,20 @@ def login():
     if request.method == 'POST': 
         username = request.form['username']
         email = request.form['email']
-        password = request.form['password']
+        pword = request.form['password']
 
         user = crud.get_user_by_email(email)
-        if user and password == user.password:
-            session['username'] = username
-            session['email'] = email
-            session['user_id'] = user.user_id
-            flash("Logged in as %s" % username)
+        if user:
+            if bcrypt.checkpw(pword.encode("utf-8"), user.password):
+                session['username'] = username
+                session['email'] = email
+                session['user_id'] = user.user_id
+                flash("Logged in as %s" % username)
 
-            return render_template('user_profile.html', user=user)
+                return render_template('user_profile.html', user=user)
+            else:
+                flash("Incorrect password, try again.")
+                return redirect('/login')
         else:
             flash("Check your fields and try again.")
             return redirect('/login')

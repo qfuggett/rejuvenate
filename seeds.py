@@ -6,6 +6,7 @@ from datetime import datetime
 import crud
 import model
 import server
+import bcrypt
 
 os.system('dropdb rejuvenate')
 os.system('createdb rejuvenate')
@@ -292,6 +293,10 @@ for i in SEED:
     about = SEED[i]['info']['about']
     member_since = SEED[i]['info']['member_since']
 
+    salt = bcrypt.gensalt()
+    b = password.encode("utf-8")
+    hashed = bcrypt.hashpw(b, salt)
+
     description = SEED[i]['cleanse']['description']
     start_date = SEED[i]['cleanse']['start_date']
     end_date = SEED[i]['cleanse']['end_date']
@@ -325,7 +330,7 @@ for i in SEED:
     comment_timestamp = global_comment_dict['timestamp']
 
 
-    db_user = crud.create_user(username, email, password, name, location, about, member_since)
+    db_user = crud.create_user(username, email, hashed, name, location, about, member_since)
     db_ingredient = crud.create_ingredient(i_name, calories, measurement_1, photo_1)
     db_ingredient_2 = crud.create_ingredient(i_name_2, calories_2, measurement_2, photo_2)
     db_ingredient_3 = crud.create_ingredient(i_name_3, calories_3, measurement_3, photo_3)
