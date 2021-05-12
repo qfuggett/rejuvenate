@@ -4,11 +4,11 @@
 {% block body %}
 <div class="row">
   <div class="col">
-    <video autoplay muted loop id="smoothie-video" class="video-fluid">
+    <video autoplay muted loop id="smoothie-video" class="video-fluid" height=100% width=100% >
       <source src="/static/img/smoothievideo.mp4" type="video/mp4">
     </video>
   </div>
-    <div class="col">    
+    <div class="col-4">    
       <h2>Create an Account</h2>
       <form action="/signup" method="POST">
           <div class="form-group w-50">
