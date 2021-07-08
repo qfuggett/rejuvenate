@@ -1,5 +1,6 @@
 ## Rejuvenate
-A Python-Flask application that allows users to create and record smoothies consumed.
+A Python-Flask application that allows users to create and record smoothies consumed.<br />
+<a href="https://drive.google.com/file/d/18z7fruHwOOtbA5_rn53h-Dv464UxpWrR/view?usp=sharing">Demo</a>
 
 ## Installation
 Since this application uses an API, you will have to request an API key from https://developer.edamam.com/food-database-api-docs.
