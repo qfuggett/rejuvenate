@@ -4,8 +4,20 @@ A Python-Flask application that allows users to create and record smoothies cons
 
 ## Installation
 Since this application uses an API, you will have to request an API key from https://developer.edamam.com/food-database-api-docs.
-After receiving your key, create a `secrets.sh` file for it to be stored there. Remember to include `secrets.sh` in your `.gitignore` file.
+After receiving your key, create a `secrets.sh` file for it to be stored there. 
+Create keys 'app_key' and 'app_value' and their values from the information received from the API.
+Remember to include `secrets.sh` in your `.gitignore` file.
+
 Create a database by running `createdb rejuvenate`, in order to store user data.
+
+Install and activate virtual environment.
+`python3 -m pip install virtualenv`
+`python3 -m virtualenv env`
+`source env/bin/activate`
+
+Activate secrets and install application requirements.
+`source secrets.sh` to activate key.
+`pip install -r requirements.txt`
 
 ## Usage
 Run `python3 server.py` to run the server. Click on the link generated to open the application in your browser.
